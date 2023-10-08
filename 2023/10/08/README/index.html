@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="zh-hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>小破绽 | 小破绽</title><meta name="author" content="cbq"><meta name="copyright" content="cbq"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JavaScript 基础第三天笔记if 多分支语句和 switch的区别：  共同点  都能实现多分支选择， 多选1 大部分情况下可以互换   区别：  switch…case语句通常处理case为比较确定值的情况，而if…else…语句更加灵活，通常用于范围判断(大于，等于某个范围)。 switch 语句进行判断后直接执行到程序的语句，效率更高，而if…else语句有几种判断条件，就得判断多少">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小破绽">
+<meta property="og:url" content="http://example.com/2023/10/08/README/index.html">
+<meta property="og:site_name" content="小破绽">
+<meta property="og:description" content="JavaScript 基础第三天笔记if 多分支语句和 switch的区别：  共同点  都能实现多分支选择， 多选1 大部分情况下可以互换   区别：  switch…case语句通常处理case为比较确定值的情况，而if…else…语句更加灵活，通常用于范围判断(大于，等于某个范围)。 switch 语句进行判断后直接执行到程序的语句，效率更高，而if…else语句有几种判断条件，就得判断多少">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-10-08T13:42:00.392Z">
+<meta property="article:modified_time" content="2023-10-08T13:43:19.877Z">
+<meta property="article:author" content="cbq">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/10/08/README/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '小破绽',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-08 21:43:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="小破绽"><span class="site-name">小破绽</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">No title</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-10-08T13:42:00.392Z" title="Created 2023-10-08 21:42:00">2023-10-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-10-08T13:43:19.877Z" title="Updated 2023-10-08 21:43:19">2023-10-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="JavaScript-基础第三天笔记"><a href="#JavaScript-基础第三天笔记" class="headerlink" title="JavaScript 基础第三天笔记"></a>JavaScript 基础第三天笔记</h2><p><strong>if 多分支语句和 switch的区别：</strong></p>
+<ol>
+<li><p>共同点</p>
+<ul>
+<li>都能实现多分支选择， 多选1</li>
+<li>大部分情况下可以互换</li>
+</ul>
+</li>
+<li><p>区别：</p>
+<ul>
+<li>switch…case语句通常处理case为比较<strong>确定值</strong>的情况，而if…else…语句更加灵活，通常用于<strong>范围判断</strong>(大于，等于某个范围)。</li>
+<li>switch 语句进行判断后直接执行到程序的语句，效率更高，而if…else语句有几种判断条件，就得判断多少次</li>
+<li>switch 一定要注意 必须是 &#x3D;&#x3D;&#x3D;  全等，一定注意 数据类型，同时注意break否则会有穿透效果</li>
+<li>结论：<ul>
+<li>当分支比较少时，if…else语句执行效率高。</li>
+<li>当分支比较多时，switch语句执行效率高，而且结构更清晰。</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+</li>
+</ol>
+<h2 id="for-语句"><a href="#for-语句" class="headerlink" title="for 语句"></a>for 语句</h2><blockquote>
+<p>掌握 for 循环语句，让程序具备重复执行能力</p>
+</blockquote>
+<p><code>for</code> 是 JavaScript 提供的另一种循环控制的话句，它和 <code>while</code> 只是语法上存在差异。</p>
+<h3 id="for语句的基本使用"><a href="#for语句的基本使用" class="headerlink" title="for语句的基本使用"></a>for语句的基本使用</h3><ol>
+<li>实现循环的 3 要素</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 1. 语法格式</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// for(起始值; 终止条件; 变化量) &#123;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//   // 要重复执行的代码</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 2. 示例：在网页中输入标题标签</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 起始值为 1</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 变化量 i++</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 终止条件 i &lt;= 6</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">6</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">`&lt;h<span class="subst">$&#123;i&#125;</span>&gt;循环控制，即重复执行&lt;h<span class="subst">$&#123;i&#125;</span>&gt;`</span>)</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>变化量和死循环，<code>for</code> 循环和 <code>while</code> 一样，如果不合理设置增量和终止条件，便会产生死循环。</p>
+</li>
+<li><p>跳出和终止循环</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 1. continue </span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (i === <span class="number">3</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">continue</span>  <span class="comment">// 结束本次循环，继续下一次循环</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 2. break</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (i === <span class="number">3</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">break</span>  <span class="comment">// 退出结束整个循环</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结论：</p>
+<ul>
+<li><code>JavaScript</code> 提供了多种语句来实现循环控制，但无论使用哪种语句都离不开循环的3个特征，即起始值、变化量、终止条件，做为初学者应着重体会这3个特征，不必过多纠结三种语句的区别。</li>
+<li>起始值、变化量、终止条件，由开发者根据逻辑需要进行设计，规避死循环的发生。</li>
+<li>当如果明确了循环的次数的时候推荐使用<code>for</code>循环,当不明确循环的次数的时候推荐使用<code>while</code>循环</li>
+</ul>
+<blockquote>
+<p>注意：<code>for</code> 的语法结构更简洁，故 <code>for</code> 循环的使用频次会更多。</p>
+</blockquote>
+<h3 id="循环嵌套"><a href="#循环嵌套" class="headerlink" title="循环嵌套"></a>循环嵌套</h3><p>利用循环的知识来对比一个简单的天文知识，我们知道地球在自转的同时也在围绕太阳公转，如果把自转和公转都看成是循环的话，就相当于是循环中又嵌套了另一个循环。</p>
+<p><img src="/./assets/universe.gif" alt="universe"></p>
+<p>实际上 JavaScript 中任何一种循环语句都支持循环的嵌套，如下代码所示：</p>
+<p><img src="/assets/1647918261399.png" alt="64791826139"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 1. 外面的循环 记录第n天 </span><br><span class="line">for (let i = 1; i &lt; 4; i++) &#123;</span><br><span class="line">    document.write(`第$&#123;i&#125;天 <span class="tag">&lt;<span class="name">br</span>&gt;</span>`)</span><br><span class="line">    // 2. 里层的循环记录 几个单词</span><br><span class="line">    for (let j = 1; j &lt; 6; j++) &#123;</span><br><span class="line">        document.write(`记住第$&#123;j&#125;个单词<span class="tag">&lt;<span class="name">br</span>&gt;</span>`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>记住，外层循环循环一次，里层循环循环全部</p>
+<h4 id="倒三角"><a href="#倒三角" class="headerlink" title="倒三角"></a>倒三角</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 外层打印几行</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 里层打印几个星星</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;★&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;br&gt;&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="/assets/1647918678956.png" alt="64791867895"></p>
+<h4 id="九九乘法表"><a href="#九九乘法表" class="headerlink" title="九九乘法表"></a>九九乘法表</h4><p>样式css</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span> <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid pink;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">2px</span> <span class="number">2px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">192</span>, <span class="number">203</span>, .<span class="number">4</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">192</span>, <span class="number">203</span>, .<span class="number">1</span>);</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">color</span>: hotpink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 外层打印几行</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 里层打印几个星星</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">        <span class="comment">// 只需要吧 ★ 换成  1 x 1 = 1   </span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div&gt; <span class="subst">$&#123;j&#125;</span> x <span class="subst">$&#123;i&#125;</span> = <span class="subst">$&#123;j * i&#125;</span> &lt;/div&gt;</span></span><br><span class="line"><span class="string">     `</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;br&gt;&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/assets/1647918734677.png" alt="64791873467"></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><blockquote>
+<p>知道什么是数组及其应用的场景，掌握数组声明及访问的语法。</p>
+</blockquote>
+<h3 id="数组是什么？"><a href="#数组是什么？" class="headerlink" title="数组是什么？"></a>数组是什么？</h3><p><strong>数组：</strong>(Array)是一种可以按顺序保存数据的数据类型</p>
+<p><strong>使用场景：</strong>如果有多个数据可以用数组保存起来，然后放到一个变量中，管理非常方便</p>
+<h3 id="数组的基本使用"><a href="#数组的基本使用" class="headerlink" title="数组的基本使用"></a>数组的基本使用</h3><h4 id="定义数组和数组单元"><a href="#定义数组和数组单元" class="headerlink" title="定义数组和数组单元"></a>定义数组和数组单元</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 1. 语法，使用 [] 来定义一个空数组</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 定义一个空数组，然后赋值给变量 classes</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// let classes = [];</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 2. 定义非空数组</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> classes = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;小刚&#x27;</span>, <span class="string">&#x27;小红&#x27;</span>, <span class="string">&#x27;小丽&#x27;</span>, <span class="string">&#x27;小米&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>[]</code> 定义数组，数据中可以存放真正的数据，如小明、小刚、小红等这些都是数组中的数据，我们这些数据称为数组单元，数组单元之间使用英文逗号分隔。</p>
+<h4 id="访问数组和数组索引"><a href="#访问数组和数组索引" class="headerlink" title="访问数组和数组索引"></a>访问数组和数组索引</h4><p>使用数组存放数据并不是最终目的，关键是能够随时的访问到数组中的数据（单元）。其实 JavaScript 为数组中的每一个数据单元都编了号，通过数据单元在数组中的编号便可以轻松访问到数组中的数据单元了。</p>
+<p>我们将数据单元在数组中的编号称为索引值，也有人称其为下标。</p>
+<p>索引值实际是按着数据单元在数组中的位置依次排列的，注意是从<code>0</code> 开始的，如下图所示：</p>
+<p><img src="/./assets/array.jpg" alt="array"></p>
+<p>观察上图可以数据单元【小明】对应的索引值为【0】，数据单元【小红】对应的索引值为【2】</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> classes = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;小刚&#x27;</span>, <span class="string">&#x27;小红&#x27;</span>, <span class="string">&#x27;小丽&#x27;</span>, <span class="string">&#x27;小米&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 1. 访问数组，语法格式为：变量名[索引值]</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">write</span>(classes[<span class="number">0</span>]) <span class="comment">// 结果为：小明</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">write</span>(classes[<span class="number">1</span>]) <span class="comment">// 结果为：小刚</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">write</span>(classes[<span class="number">4</span>]) <span class="comment">// 结果为：小米</span></span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 2. 通过索引值还可以为数组单重新赋值</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">write</span>(classes[<span class="number">3</span>]) <span class="comment">// 结果为：小丽</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 重新为索引值为 3 的单元赋值</span></span></span><br><span class="line"><span class="language-javascript">  classes[<span class="number">3</span>] = <span class="string">&#x27;小小丽&#x27;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">wirte</span>(classes[<span class="number">3</span>]); <span class="comment">// 结果为： 小小丽</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数据单元值类型"><a href="#数据单元值类型" class="headerlink" title="数据单元值类型"></a>数据单元值类型</h4><p>数组做为数据的集合，它的单元值可以是任意数据类型</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 6. 数组单值类型可以是任意数据类型</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// a) 数组单元值的类型为字符类型</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> list = [<span class="string">&#x27;HTML&#x27;</span>, <span class="string">&#x27;CSS&#x27;</span>, <span class="string">&#x27;JavaScript&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// b) 数组单元值的类型为数值类型</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> scores = [<span class="number">78</span>, <span class="number">84</span>, <span class="number">70</span>, <span class="number">62</span>, <span class="number">75</span>]</span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// c) 混合多种类型</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> mixin = [<span class="literal">true</span>, <span class="number">1</span>, <span class="literal">false</span>, <span class="string">&#x27;hello&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数组长度属性"><a href="#数组长度属性" class="headerlink" title="数组长度属性"></a>数组长度属性</h4><p>重申一次，数组在 JavaScript 中并不是新的数据类型，它属于对象类型。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 定义一个数组</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> arr = [<span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;css&#x27;</span>, <span class="string">&#x27;javascript&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 数组对应着一个 length 属性，它的含义是获取数组的长度</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>) <span class="comment">// 3</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="操作数组"><a href="#操作数组" class="headerlink" title="操作数组"></a>操作数组</h3><p>数组做为对象数据类型，不但有 <code>length</code> 属性可以使用，还提供了许多方法：</p>
+<ol>
+<li>push 动态向数组的尾部添加一个单元</li>
+<li>unshit 动态向数组头部添加一个单元</li>
+<li>pop 删除最后一个单元</li>
+<li>shift 删除第一个单元</li>
+<li>splice 动态删除任意单元</li>
+</ol>
+<p>使用以上4个方法时，都是直接在原数组上进行操作，即成功调任何一个方法，原数组都跟着发生相应的改变。并且在添加或删除单元时 <code>length</code> 并不会发生错乱。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 定义一个数组</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> arr = [<span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;css&#x27;</span>, <span class="string">&#x27;javascript&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 1. push 动态向数组的尾部添加一个单元</span></span></span><br><span class="line"><span class="language-javascript">  arr.<span class="title function_">push</span>(<span class="string">&#x27;Nodejs&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span></span><br><span class="line"><span class="language-javascript">  arr.<span class="title function_">push</span>(<span class="string">&#x27;Vue&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 2. unshit 动态向数组头部添加一个单元</span></span></span><br><span class="line"><span class="language-javascript">  arr.<span class="title function_">unshift</span>(<span class="string">&#x27;VS Code&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 3. splice 动态删除任意单元</span></span></span><br><span class="line"><span class="language-javascript">  arr.<span class="title function_">splice</span>(<span class="number">2</span>, <span class="number">1</span>) <span class="comment">// 从索引值为2的位置开始删除1个单元</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 4. pop 删除最后一个单元</span></span></span><br><span class="line"><span class="language-javascript">  arr.<span class="title function_">pop</span>()</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 5. shift 删除第一个单元</span></span></span><br><span class="line"><span class="language-javascript">  arr.<span class="title function_">shift</span>()</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">cbq</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2023/10/08/README/">http://example.com/2023/10/08/README/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/10/08/js/" title="js第一天"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">js第一天</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">cbq</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%A4%A9%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">JavaScript 基础第三天笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for-%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">for 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">for语句的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97"><span class="toc-number">2.2.</span> <span class="toc-text">循环嵌套</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%92%E4%B8%89%E8%A7%92"><span class="toc-number">2.2.1.</span> <span class="toc-text">倒三角</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8"><span class="toc-number">2.2.2.</span> <span class="toc-text">九九乘法表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">数组是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">数组的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E5%8D%95%E5%85%83"><span class="toc-number">3.2.1.</span> <span class="toc-text">定义数组和数组单元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95"><span class="toc-number">3.2.2.</span> <span class="toc-text">访问数组和数组索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8D%95%E5%85%83%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.2.3.</span> <span class="toc-text">数据单元值类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E5%B1%9E%E6%80%A7"><span class="toc-number">3.2.4.</span> <span class="toc-text">数组长度属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E7%BB%84"><span class="toc-number">3.3.</span> <span class="toc-text">操作数组</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/08/README/" title="No title">No title</a><time datetime="2023-10-08T13:42:00.392Z" title="Created 2023-10-08 21:42:00">2023-10-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/08/js/" title="js第一天">js第一天</a><time datetime="2023-10-08T12:07:10.611Z" title="Created 2023-10-08 20:07:10">2023-10-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/07/hello-world/" title="Hello World">Hello World</a><time datetime="2023-10-07T15:49:13.994Z" title="Created 2023-10-07 23:49:13">2023-10-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By cbq</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
