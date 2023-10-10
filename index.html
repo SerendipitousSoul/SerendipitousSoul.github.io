@@ -74,9 +74,11 @@
         <div class="nav-menu">
           
             
-              <a class="nav-menu-item" href="/feat">CS基础</a>
+              <a class="nav-menu-item" href="/CS">CS基础</a>
             
-              <a class="nav-menu-item" href="/base">数理逻辑</a>
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
             
           
           
@@ -90,7 +92,7 @@
     <div class="wall-main" id="wall-main">
       <div class="wall-title">小破绽</div>
       <div class="wall-subtitle"></div>
-      <div class="wall-description">“宁静致远”</div>
+      <div class="wall-description">“科学与真理”</div>
     </div>
     <div class="wall-bg">
       <div class="wall-bg-index">
@@ -174,6 +176,13 @@
                      type="checkbox"
                      />
               <label class="radio-skin--Math" for="radio-Math"></label>
+            </div>
+          
+            <div class="radio">
+              <input id="radio-Code"
+                     type="checkbox"
+                     />
+              <label class="radio-skin--Code" for="radio-Code"></label>
             </div>
           
         </div>
@@ -268,6 +277,11 @@
         </div>
       </div>
     </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
     
     
   <script type="text/javascript">
@@ -401,7 +415,7 @@
   
   
   <script type="text/javascript">
-    const timelineData = {"types":["CS","Math"],"posts":[{"title":"单核处理器（8086/8088）","path":"/2023/10/09/8086%E5%A4%84%E7%90%86%E5%99%A8%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7/","icon":"/images/icon/icon-article.svg","type":"CS","date":"2023-10-09"},{"title":"微型计算机概述","path":"/2023/10/09/%E5%BE%AE%E5%9E%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%BF%B0/","icon":"/images/icon/icon-article.svg","type":"CS","date":"2023-10-09"},{"title":"js第一天","path":"/2023/10/08/js/","icon":"/images/icon/icon-article.svg","type":"CS","date":"2023-10-08"}]}
+    const timelineData = {"types":["CS","Math","Code"],"posts":[{"title":"代数 (3) 同态","path":"/2023/10/10/%E4%BB%A3%E6%95%B0-(3)-%E5%90%8C%E6%80%81/","icon":"/images/icon/icon-app.svg","type":"Math","date":"2023-10-10"},{"title":"代数 (2) 子代数","path":"/2023/10/10/%E5%AD%90%E4%BB%A3%E6%95%B0/","icon":"/images/icon/icon-app.svg","type":"Math","date":"2023-10-10"},{"title":"代数 (1) 代数结构","path":"/2023/10/10/%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84/","icon":"/images/icon/icon-app.svg","type":"Math","date":"2023-10-10"},{"title":"单核处理器（8086/8088）","path":"/2023/10/09/8086%E5%A4%84%E7%90%86%E5%99%A8%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7/","icon":"/images/icon/icon-article.svg","type":"CS","date":"2023-10-09"},{"title":"微型计算机概述","path":"/2023/10/09/%E5%BE%AE%E5%9E%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%BF%B0/","icon":"/images/icon/icon-article.svg","type":"CS","date":"2023-10-09"},{"title":"js第一天","path":"/2023/10/08/js/","icon":"/images/icon/icon-event.svg","type":"Code","date":"2023-10-08"}]}
     const {types, posts} = timelineData
     listEl = document.querySelector("#timeline-list");
 
