@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <title>
       
-        单核处理器（8086/8088） | 小破绽
+        单核处理器 | 小破绽
       
     </title>
     <meta name="description" content=""/>
@@ -89,10 +89,10 @@
   <article class="post-content">
     <div class="post-inner--toc">
       <div class="post-content__head">
-        <div class="post-title">单核处理器（8086/8088）</div>
+        <div class="post-title">单核处理器</div>
         <div class="post-info">
           
-  <a href="/tags/8086/" class="post-tag">#8086</a>
+  <a href="/tags/8086/" class="post-tag">#8086</a><a href="/tags/EU/" class="post-tag">#EU</a><a href="/tags/BIU/" class="post-tag">#BIU</a>
 
 
           <span class="post-date">2023-10-09</span>
@@ -101,7 +101,7 @@
       
         <aside class="toc-outer">
           <div class="toc-title">目录</div>
-          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="post-toc-text">8086处理器功能特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="post-toc-text">8086处理器体系结构</span></a></li></ol>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="post-toc-text">8086处理器功能特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="post-toc-text">8086处理器体系结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#biu%E6%80%BB%E7%BA%BF%E6%8E%A5%E5%8F%A3%E5%8D%95%E5%85%83"><span class="post-toc-text">BIU：总线接口单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#eu%E6%89%A7%E8%A1%8C%E5%8D%95%E5%85%83"><span class="post-toc-text">EU：执行单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="post-toc-text">工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%93%E6%9E%84"><span class="post-toc-text">寄存器结构</span></a></li></ol>
           <a href="#" class="toc-top">回到顶部</a>
         </aside>
       
@@ -119,7 +119,7 @@
 <li>1978年，<code>8086</code>第一代16位微处理器，第一次将<code>流水线思想</code>引进微处理器</li>
 <li>1979年推出<code>8088</code>，<strong>8位外部数据总线</strong>，兼容当时丰富的8位配套器件， 其内部结构与8086基本相同</li>
 <li>直接主存寻址能力<code>1MB</code>，20条地址线</li>
-<li>14 个 16 位程序员可见寄存器</li>
+<li>14 个 16 位程序员可见寄存器，也就是<u>段内偏移最多64K</u></li>
 <li>支持多种寻址方式，支持8、16位无符号和带符号二进制或十进制运算，包括乘除法，但<u>不支持浮点数运算</u></li>
 <li>指令的操作数可以是16位，也可以是8位</li>
 <li>输出输出的方式是<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64365315/article/details/126122183">独立编址</a></li>
@@ -128,6 +128,76 @@
 <li>操作数类型：位、字节、字和块</li>
 </ul>
 <h2 id="处理器体系结构">8086处理器体系结构</h2>
+<h3 id="biu总线接口单元">BIU：总线接口单元</h3>
+<p>​ 负责与存储器、IO接口传递数据：</p>
+<ul>
+<li>从内存取指令，送到指令队列</li>
+<li>配合EU从指定的内存单元或IO端口取数据</li>
+<li>将EU的操作结果送到指定的内存单元或IO端口</li>
+</ul>
+<h3 id="eu执行单元">EU：执行单元</h3>
+<p>​ 负责指令的执行（算术、逻辑、移位运算，有效地址计算，控制命令、……）</p>
+<p><img src="https://s2.loli.net/2023/10/11/HlABCwvpXjn5kmh.png" style="zoom: 50%;" /></p>
+<h3 id="工作原理">工作原理</h3>
+<p>BIU取指令，EU执行指令，两者相互配合</p>
+<ul>
+<li>指令队列有2+空字节，BIU自动取指 → 指令队列</li>
+<li>EU总是从指令队列前部取指令去执行</li>
+<li>如果指令需要访问M或I/O，EU会请求BIU去完成</li>
+<li>由于存在指令队列，BIU和EU可以并行工作</li>
+</ul>
+<h2 id="寄存器结构">寄存器结构</h2>
+<p>一共24个16位寄存器，其中4个数据寄存器和标志寄存器都分为两部分，高八位和低八位。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs mermaid">graph TD<br><br>subgraph 寄存器<br>  subgraph 通用寄存器<br>    数据寄存器[数据寄存器]<br>    数据寄存器 --&gt; AX<br>    数据寄存器 --&gt; BX<br>    数据寄存器 --&gt; CX<br>    数据寄存器 --&gt; DX<br>    AX[AX]<br>    BX[BX]<br>    CX[CX]<br>    DX[DX]<br>    指针寄存器[指针寄存器]<br>    指针寄存器 --&gt; 堆栈指针<br>    指针寄存器 --&gt; 基数指针<br>    堆栈指针[SP]<br>    基数指针[BP]<br>    变址寄存器[变址寄存器]<br>    变址寄存器 --&gt; 源地址<br>    变址寄存器 --&gt; 目的地址<br>    源地址[SI]<br>    目的地址[DI]<br>  end<br><br>  控制寄存器[控制寄存器]<br>  控制寄存器 --&gt; 指令指针<br>  控制寄存器 --&gt; 标志寄存器<br>  指令指针[IP]<br>  标志寄存器[PSW]<br><br>  端寄存器[端寄存器]<br>  端寄存器 --&gt; 代码段<br>  端寄存器 --&gt; 数据段<br>  端寄存器 --&gt; 堆栈段<br>  端寄存器 --&gt; 附加段<br>  代码段[CS]<br>  数据段[DS]<br>  堆栈段[SS]<br>  附加段[ES]<br>end<br><br></code></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/10/11/nlFZHiGSDdaNCJ3.png" style="zoom:50%;" /></p>
+<ul>
+<li><p>能够放置操作数，能够随便引用的寄存器只有上面8个，并且指针寄存器只能当做16位寄存器使用，不能拆成两个8位使用</p></li>
+<li><p>下面这个表就是规定16位和8位数据，寄存器的编号(使用三位二进制即可)，段寄存器是单独编号的，寄存器是通过操作码特定部分得知操作数是多少位</p></li>
+<li><p>注意这里四个数据寄存器的顺序是 ACDB</p>
+<p><img src="https://s2.loli.net/2023/10/11/Zhucf7BOK8w5oGz.png" style="zoom: 50%;" /></p></li>
+<li><p>寄存器的英文全称主要是对应的是该寄存器的用途</p>
+<p><img src="https://s2.loli.net/2023/10/11/iJkWwzo5sIDXHLh.png" style="zoom: 50%;" /></p></li>
+<li><p>BX寄存器只是存了一个16位的地址偏移量，实际上默认的起始地址是<span class="math inline">\(DS\)</span>，于是形成地址是这样形成的：</p>
+<ul>
+<li>段寄存器<span class="math inline">\(DS\)</span>存的是，起始地址的高16位，低4位默认是0</li>
+<li>然后<span class="math inline">\(BX\)</span>里面存放的是16位的地址偏移量</li>
+<li>然后两个相加，得到内存地址，从这个内存地址读取数据到AX</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">MOV AX, [BX]; B寄存器数据寄存器中唯一一个可以当做指针来用，进行间接寻址的寄存器<br><br></code></pre></td></tr></table></figure>
+<ul>
+<li>若不使用<span class="math inline">\(BX\)</span>，可以使用SI或者<span class="math inline">\(DI\)</span>，也就是8086里面能够当指针来使用的就只有<span class="math inline">\(BX，SI，DI\)</span>三个寄存器</li>
+</ul></li>
+<li><p><span class="math inline">\(CX\)</span>是用来计数的，可以实现循环</p>
+<ul>
+<li><span class="math inline">\(Loop\)</span>指令，会先将<span class="math inline">\(CX\)</span>减一，若<span class="math inline">\(CX=0\)</span>，则不跳转，大于零则跳转到<span class="math inline">\(L1\)</span>开始</li>
+<li>后面还有移位指令，若移位大于1，用低八位<span class="math inline">\(CL\)</span>寄存器，进行计数</li>
+<li>串操作指令，使用CX寄存器记录数组的长度</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs assembly">MOV CX, 100 ; 设置 CX 寄存器为 100<br><br>L1:<br>    ; 这里是循环的主体<br>    ; 可以在这里添加想要执行的代码<br><br>    LOOP L1 ; 循环，CX 减一，如果 CX 不为零，跳转到标签 L1<br><br>; 循环结束后的代码可以在这里继续<br><br></code></pre></td></tr></table></figure></li>
+<li><p><span class="math inline">\(DX\)</span>就是拿来记录数据的</p>
+<ul>
+<li>比如除法指令，得到的商在<span class="math inline">\(AX\)</span>寄存器，余数就默认在<span class="math inline">\(DX\)</span>寄存器里面</li>
+</ul></li>
+<li><p>除开以上的特殊情况，ABCD四个寄存器是可以随便使用的，存储一些临时的数据</p></li>
+<li><p><span class="math inline">\(SP\)</span>和<span class="math inline">\(BP\)</span>是用来访问堆栈的，存放的是16位栈内偏移</p></li>
+<li><p><span class="math inline">\(SI\)</span>和<span class="math inline">\(DI\)</span>是用来给串操作使用的，当然也可以用来当指针使用</p></li>
+<li><p>状态字寄存器无法独立的将低八位和高八位拿出来使用，所以图上画法有误</p></li>
+<li><p>附加段用途：</p>
+<ul>
+<li><p>比如两个数组的拷贝，两个数组在内存中的距离超过64K，超过一个段的最大距离了，于是一个数组可以放在<span class="math inline">\(DS\)</span>，另一个放在<span class="math inline">\(ES\)</span></p></li>
+<li><pre class="assembly"><code>MOV AX, ES:[BX]  ; 使用 ES 寄存器引用内存中 BX 寄存器指定的地址
+MOV AX, ES:[SI]  ; 使用 ES 寄存器引用内存中 SI 寄存器指定的地址
+MOV AX, ES:[DI]  ; 使用 ES 寄存器引用内存中 DI 寄存器指定的地址</code></pre></li>
+<li><p><img src="https://s2.loli.net/2023/10/11/WIZ1z5Hv7COnPRr.png" style="zoom:67%;" /></p></li>
+</ul></li>
+<li><p><strong>取指令：首地址放在<span class="math inline">\(CS\)</span>里面，末尾填上4个0，段内偏移放在<span class="math inline">\(IP\)</span>里面，两者相加的结果作为内存地址，从而取得下一条指令。</strong></p></li>
+<li><p>管理堆栈：对于一个栈，大地址应该在堆栈底部，然后通过<span class="math inline">\(SS\)</span>和<span class="math inline">\(SP\)</span>两个指针同时指向栈顶元素</p></li>
+<li><p>访问堆栈：不加中括号，使用<span class="math inline">\(BP\)</span>作为指针的时候，默认的段起始地址是存在<span class="math inline">\(SS\)</span>里面,可以拿来直接访问堆栈的某个位置的元素，而不破坏其原有的结构。<code>MOV AX,[BP]</code>也可以访问堆栈具体某个数。</p></li>
+<li><p><img src="https://s2.loli.net/2023/10/11/eY35xhfLwzS2APo.png" style="zoom: 50%;" /></p></li>
+<li><p>关于标志位寄存器</p>
+<p><img src="image-20231011234004743.png" alt="image-20231011234004743" style="zoom:67%;" /></p></li>
+<li></li>
+</ul>
 
       </div>
     </div>
