@@ -85,7 +85,7 @@
     </div>
     <div class="body">
       
-  <div class="wall wall-category--plain">
+  <div class="wall wall-category">
     <div class="wall-main">
       <div class="wall-category-title">
         <div class="title-icon"
@@ -94,13 +94,35 @@
       </div>
       <div class="wall-category-description">记录数理逻辑</div>
       <div class="wall-category-tags">
-        <div id="tags-outer"><a href="/tags/%E4%BB%A3%E6%95%B0/" style="font-size: 1em;">代数</a> <a href="/tags/%E4%BB%A3%E6%95%B0%E5%B8%B8%E5%85%83/" style="font-size: 1em;">代数常元</a> <a href="/tags/%E5%90%8C%E6%80%81/" style="font-size: 1em;">同态</a> <a href="/tags/%E5%90%8C%E6%80%81%E8%B1%A1/" style="font-size: 1em;">同态象</a> <a href="/tags/%E5%AD%90%E4%BB%A3%E6%95%B0/" style="font-size: 1em;">子代数</a> <a href="/tags/%E6%98%A0%E5%B0%84/" style="font-size: 1em;">映射</a></div>
+        <div id="tags-outer"><canvas width="500" height="500" id="tagCanvas"><a href="/tags/DM/" style="font-size: 14px;">DM</a> <a href="/tags/KDD/" style="font-size: 14px;">KDD</a> <a href="/tags/%E4%BB%A3%E6%95%B0/" style="font-size: 14px;">代数</a> <a href="/tags/%E4%BB%A3%E6%95%B0%E5%B8%B8%E5%85%83/" style="font-size: 14px;">代数常元</a> <a href="/tags/%E5%90%8C%E6%80%81/" style="font-size: 14px;">同态</a> <a href="/tags/%E5%90%8C%E6%80%81%E8%B1%A1/" style="font-size: 14px;">同态象</a> <a href="/tags/%E5%AD%90%E4%BB%A3%E6%95%B0/" style="font-size: 14px;">子代数</a> <a href="/tags/%E6%98%A0%E5%B0%84/" style="font-size: 14px;">映射</a><canvas></div>
       </div>
     </div>
   </div>
   <div class="post-list">
     
       
+  
+  <div class="post-card">
+    <div class="post__head">
+      <a href="/2023/10/11/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E6%A6%82%E8%BF%B0/" class="post-title hover-line">数据挖掘概述</a>
+      
+    </div>
+    <div class="post__body">
+      
+        <a href="/2023/10/11/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E6%A6%82%E8%BF%B0/"
+           class="post-cover"
+           style="background-image: url(https://s2.loli.net/2023/10/11/w1TxhlZqicgXraj.png)"></a>
+      
+      <div class="post-excerpt"></div>
+    </div>
+    <div class="post__foot">
+      <div class="post-tags">
+  <a href="/tags/DM/" class="post-tag">#DM</a><a href="/tags/KDD/" class="post-tag">#KDD</a>
+
+</div>
+    </div>
+  </div>
+
   
   <div class="post-card">
     <div class="post__head">
@@ -179,49 +201,39 @@
           
             <div class="foot-line">
               
-                <div class="matts">卑</div>
+                <div class="matts">欲</div>
               
-                <div class="matts">鄙</div>
+                <div class="matts">买</div>
               
-                <div class="matts">是</div>
+                <div class="matts">桂</div>
               
-                <div class="matts">卑</div>
+                <div class="matts">花</div>
               
-                <div class="matts">鄙</div>
+                <div class="matts">同</div>
               
-                <div class="matts">者</div>
+                <div class="matts">载</div>
               
-                <div class="matts">的</div>
-              
-                <div class="matts">通</div>
-              
-                <div class="matts">行</div>
-              
-                <div class="matts">证</div>
+                <div class="matts">酒</div>
               
             </div>
           
             <div class="foot-line">
               
-                <div class="matts">高</div>
+                <div class="matts">终</div>
               
-                <div class="matts">尚</div>
+                <div class="matts">不</div>
               
-                <div class="matts">是</div>
+                <div class="matts">似</div>
               
-                <div class="matts">高</div>
+            </div>
+          
+            <div class="foot-line">
               
-                <div class="matts">尚</div>
+                <div class="matts">少</div>
               
-                <div class="matts">者</div>
+                <div class="matts">年</div>
               
-                <div class="matts">的</div>
-              
-                <div class="matts">墓</div>
-              
-                <div class="matts">志</div>
-              
-                <div class="matts">铭</div>
+                <div class="matts">游</div>
               
             </div>
           
@@ -257,6 +269,35 @@
               src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
     
     
+  
+    <script type="text/javascript"
+            charset="utf-8"
+            src="/js/tagcanvas.min.js"></script>
+    <script type = "text/javascript">
+        window.onload = function() {
+            try {
+                TagCanvas.Start('tagCanvas', '', {
+                    outlineThickness: 1,
+                    maxSpeed: 0.03,
+                    // freezeActive: true,
+                    // freezeDecel: true,
+                    textColour: null,
+                    textColour: null,
+                    outlineColour: "#aaa",
+                    weight: true,
+                    padding: 4,
+                    // clickToFront: 200,
+                    fadIn: 200,
+                    // pinchZoom: true,
+                    wheelZoom: false,
+                    initial: [0.1, -0.03]
+                });
+            } catch (e) {
+                // something went wrong, hide the canvas container
+                document.getElementById('tags-outer').style.display = 'none';
+            }
+        };
+    </script>
   
 
   </body>

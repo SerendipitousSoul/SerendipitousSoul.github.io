@@ -85,7 +85,7 @@
     </div>
     <div class="body">
       
-  <div class="wall wall-category--plain">
+  <div class="wall wall-category">
     <div class="wall-main">
       <div class="wall-category-title">
         <div class="title-icon"
@@ -94,7 +94,7 @@
       </div>
       <div class="wall-category-description">主要是编程相关的内容</div>
       <div class="wall-category-tags">
-        <div id="tags-outer"><a href="/tags/Javascript/" style="font-size: 1em;">Javascript</a></div>
+        <div id="tags-outer"><canvas width="500" height="500" id="tagCanvas"><a href="/tags/Javascript/" style="font-size: 14px;">Javascript</a><canvas></div>
       </div>
     </div>
   </div>
@@ -131,49 +131,39 @@
           
             <div class="foot-line">
               
-                <div class="matts">卑</div>
+                <div class="matts">欲</div>
               
-                <div class="matts">鄙</div>
+                <div class="matts">买</div>
               
-                <div class="matts">是</div>
+                <div class="matts">桂</div>
               
-                <div class="matts">卑</div>
+                <div class="matts">花</div>
               
-                <div class="matts">鄙</div>
+                <div class="matts">同</div>
               
-                <div class="matts">者</div>
+                <div class="matts">载</div>
               
-                <div class="matts">的</div>
-              
-                <div class="matts">通</div>
-              
-                <div class="matts">行</div>
-              
-                <div class="matts">证</div>
+                <div class="matts">酒</div>
               
             </div>
           
             <div class="foot-line">
               
-                <div class="matts">高</div>
+                <div class="matts">终</div>
               
-                <div class="matts">尚</div>
+                <div class="matts">不</div>
               
-                <div class="matts">是</div>
+                <div class="matts">似</div>
               
-                <div class="matts">高</div>
+            </div>
+          
+            <div class="foot-line">
               
-                <div class="matts">尚</div>
+                <div class="matts">少</div>
               
-                <div class="matts">者</div>
+                <div class="matts">年</div>
               
-                <div class="matts">的</div>
-              
-                <div class="matts">墓</div>
-              
-                <div class="matts">志</div>
-              
-                <div class="matts">铭</div>
+                <div class="matts">游</div>
               
             </div>
           
@@ -209,6 +199,35 @@
               src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
     
     
+  
+    <script type="text/javascript"
+            charset="utf-8"
+            src="/js/tagcanvas.min.js"></script>
+    <script type = "text/javascript">
+        window.onload = function() {
+            try {
+                TagCanvas.Start('tagCanvas', '', {
+                    outlineThickness: 1,
+                    maxSpeed: 0.03,
+                    // freezeActive: true,
+                    // freezeDecel: true,
+                    textColour: null,
+                    textColour: null,
+                    outlineColour: "#aaa",
+                    weight: true,
+                    padding: 4,
+                    // clickToFront: 200,
+                    fadIn: 200,
+                    // pinchZoom: true,
+                    wheelZoom: false,
+                    initial: [0.1, -0.03]
+                });
+            } catch (e) {
+                // something went wrong, hide the canvas container
+                document.getElementById('tags-outer').style.display = 'none';
+            }
+        };
+    </script>
   
 
   </body>

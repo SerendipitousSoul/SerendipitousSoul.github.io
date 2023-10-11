@@ -59,7 +59,7 @@
     
     
   <link rel="stylesheet" type="text/css" href="/css/post.css" />
-  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
 
   <meta name="generator" content="Hexo 6.3.0"></head>
   <body>
@@ -166,7 +166,7 @@
 </div>
 
     
-    
+    <div id="gitalk-container"></div>
   </div>
 
     </div>
@@ -176,49 +176,39 @@
           
             <div class="foot-line">
               
-                <div class="matts">卑</div>
+                <div class="matts">欲</div>
               
-                <div class="matts">鄙</div>
+                <div class="matts">买</div>
               
-                <div class="matts">是</div>
+                <div class="matts">桂</div>
               
-                <div class="matts">卑</div>
+                <div class="matts">花</div>
               
-                <div class="matts">鄙</div>
+                <div class="matts">同</div>
               
-                <div class="matts">者</div>
+                <div class="matts">载</div>
               
-                <div class="matts">的</div>
-              
-                <div class="matts">通</div>
-              
-                <div class="matts">行</div>
-              
-                <div class="matts">证</div>
+                <div class="matts">酒</div>
               
             </div>
           
             <div class="foot-line">
               
-                <div class="matts">高</div>
+                <div class="matts">终</div>
               
-                <div class="matts">尚</div>
+                <div class="matts">不</div>
               
-                <div class="matts">是</div>
+                <div class="matts">似</div>
               
-                <div class="matts">高</div>
+            </div>
+          
+            <div class="foot-line">
               
-                <div class="matts">尚</div>
+                <div class="matts">少</div>
               
-                <div class="matts">者</div>
+                <div class="matts">年</div>
               
-                <div class="matts">的</div>
-              
-                <div class="matts">墓</div>
-              
-                <div class="matts">志</div>
-              
-                <div class="matts">铭</div>
+                <div class="matts">游</div>
               
             </div>
           
@@ -254,7 +244,14 @@
               src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
     
     
-  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
 
   </body>
 </html>
