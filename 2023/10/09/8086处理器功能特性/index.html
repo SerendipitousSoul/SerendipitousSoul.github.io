@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <title>
       
-        单核处理器 | 小破绽
+        8086内部结构分析 | 小破绽
       
     </title>
     <meta name="description" content=""/>
@@ -89,10 +89,10 @@
   <article class="post-content">
     <div class="post-inner--toc">
       <div class="post-content__head">
-        <div class="post-title">单核处理器</div>
+        <div class="post-title">8086内部结构分析</div>
         <div class="post-info">
           
-  <a href="/tags/8086/" class="post-tag">#8086</a><a href="/tags/EU/" class="post-tag">#EU</a><a href="/tags/BIU/" class="post-tag">#BIU</a>
+  <a href="/tags/8086/" class="post-tag">#8086</a><a href="/tags/EU/" class="post-tag">#EU</a><a href="/tags/BIU/" class="post-tag">#BIU</a><a href="/tags/%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%93%E6%9E%84/" class="post-tag">#寄存器结构</a><a href="/tags/%E4%B8%BB%E5%AD%98%E7%BB%93%E6%9E%84/" class="post-tag">#主存结构</a>
 
 
           <span class="post-date">2023-10-09</span>
@@ -101,7 +101,7 @@
       
         <aside class="toc-outer">
           <div class="toc-title">目录</div>
-          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="post-toc-text">8086处理器功能特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="post-toc-text">8086处理器体系结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#biu%E6%80%BB%E7%BA%BF%E6%8E%A5%E5%8F%A3%E5%8D%95%E5%85%83"><span class="post-toc-text">BIU：总线接口单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#eu%E6%89%A7%E8%A1%8C%E5%8D%95%E5%85%83"><span class="post-toc-text">EU：执行单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="post-toc-text">工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%93%E6%9E%84"><span class="post-toc-text">寄存器结构</span></a></li></ol>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="post-toc-text">8086处理器功能特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="post-toc-text">8086处理器体系结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#biu%E6%80%BB%E7%BA%BF%E6%8E%A5%E5%8F%A3%E5%8D%95%E5%85%83"><span class="post-toc-text">BIU：总线接口单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#eu%E6%89%A7%E8%A1%8C%E5%8D%95%E5%85%83"><span class="post-toc-text">EU：执行单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="post-toc-text">工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%93%E6%9E%84"><span class="post-toc-text">寄存器结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%BB%E5%AD%98%E7%BB%93%E6%9E%84"><span class="post-toc-text">主存结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="post-toc-text">例题</span></a></li></ol>
           <a href="#" class="toc-top">回到顶部</a>
         </aside>
       
@@ -195,9 +195,39 @@ MOV AX, ES:[DI]  ; 使用 ES 寄存器引用内存中 DI 寄存器指定的地�
 <li><p>访问堆栈：不加中括号，使用<span class="math inline">\(BP\)</span>作为指针的时候，默认的段起始地址是存在<span class="math inline">\(SS\)</span>里面,可以拿来直接访问堆栈的某个位置的元素，而不破坏其原有的结构。<code>MOV AX,[BP]</code>也可以访问堆栈具体某个数。</p></li>
 <li><p><img src="https://s2.loli.net/2023/10/11/eY35xhfLwzS2APo.png" style="zoom: 50%;" /></p></li>
 <li><p>关于标志位寄存器</p>
-<p><img src="https://s2.loli.net/2023/10/11/2bSyxEN8QrVBLuJ.png" style="zoom:67%;" /></p></li>
-<li></li>
+<ul>
+<li>先将<span class="math inline">\(OB5H\)</span>放到<span class="math inline">\(AL\)</span>寄存器，随后将<span class="math inline">\(8FH\)</span>与<span class="math inline">\(AL\)</span>寄存器的值相加，值放在<span class="math inline">\(AL\)</span>寄存器中</li>
 </ul>
+<p><img src="https://s2.loli.net/2023/10/11/2bSyxEN8QrVBLuJ.png" style="zoom:67%;" /></p>
+<ul>
+<li><img src="https://s2.loli.net/2023/10/12/dQLY8g6cv2XGI1w.png" style="zoom:67%;" /></li>
+</ul></li>
+</ul>
+<h2 id="主存结构">主存结构</h2>
+<ul>
+<li>8086的主存和IO都是16位，支持16位读写，也支持8位读写(8088主存和IO都是8位，只支持8位读写)。</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/10/12/faLoZMH2c9w7v5Q.png" style="zoom:67%;" /></p>
+<ul>
+<li><p>分段结构</p>
+<ul>
+<li><p>代码、数据量不大 → 使其处于同一段内（64KB范围内）→ 可减少指令长度、提高运行速度</p></li>
+<li><p>内存分段为程序的浮动分配创造了条件</p></li>
+<li><p>形式地址6832H:1280H → 物理地址？68320H + 1280H = 695A0H</p>
+<p><img src="image-20231012112741882.png" alt="image-20231012112741882" style="zoom: 50%;" /></p></li>
+<li><p>各个分段之间可以重叠</p></li>
+<li><p>段寄存器的使用</p>
+<p><img src="https://s2.loli.net/2023/10/12/1LwY43mMpUNCGci.png" style="zoom:67%;" /></p></li>
+<li><p>特殊的主存区域</p>
+<ul>
+<li>中断向量区：00000H～003FFH（1KB）每个中断向量占4个字节，256×4＝1K</li>
+<li>显示缓冲区：单色 B0000H～B0FFFH（25×80×2＝4000字节, 4KB）彩色 B8000H～BFFFFH（32KB）</li>
+<li>启动区：FFFF0H～FFFFFH（16个字节）无条件转移指令</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="例题">例题</h2>
+<p><img src="https://s2.loli.net/2023/10/12/oaSXk1iVbB8HYze.png" /></p>
 
       </div>
     </div>
