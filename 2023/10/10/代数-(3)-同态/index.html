@@ -101,7 +101,7 @@
       
         <aside class="toc-outer">
           <div class="toc-title">目录</div>
-          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%98%A0%E5%B0%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">映射的定义</span></a></li></ol>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%98%A0%E5%B0%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">映射的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%8C%E6%80%81"><span class="post-toc-text">同态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%90%8C%E6%80%81%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">同态的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%90%8C%E6%80%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="post-toc-text">同态的分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%8C%E6%80%81%E8%B1%A1%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">同态象的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%8C%E6%80%81%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="post-toc-text">同态的性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%861"><span class="post-toc-text">定理1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%862"><span class="post-toc-text">定理2</span></a></li></ol></li></ol>
           <a href="#" class="toc-top">回到顶部</a>
         </aside>
       
@@ -111,13 +111,54 @@
             
           </div>
         
-        <h2 id="映射的定义">映射的定义</h2>
+        <p>同态简单来说，就是运算和映射的顺序可以交换，只是交换后，运算要变为在另一代数系统的对于运算。需要注意的是同态的相关性质、相关定理。</p>
+<span id="more"></span>
+<h2 id="映射的定义">映射的定义</h2>
 <p>设<span class="math inline">\(A,B\)</span>为非空集合，若存在某种对应法则<span class="math inline">\(f\)</span>，使得对每个<span class="math inline">\(x∈A\)</span>都有唯一确定的<span class="math inline">\(y∈B\)</span>与之对应，则称对应法则 <span class="math inline">\(f\)</span> 为从 <span class="math inline">\(A\)</span> 到 <span class="math inline">\(B\)</span> 的映射， 记为 <span class="math inline">\(f:A→B\)</span>。在映射中，每个象都必然有一个原象</p>
 <ul>
 <li>满射：任一象都能找到一个原象。一个象可以有多个原象（即，<strong>可以多对一，且象集中不能有剩余的元素</strong>）</li>
 <li>单射：一个象至多只有一个原象。（若<strong>象相同则原象一定相同，若象不同则原象一定不同</strong>。象集、原象集都可以有剩下的元素）</li>
-<li></li>
+<li>双射：单设且满射。(<strong>原象集、象集中的元素一一对应</strong>)。</li>
 </ul>
+<h2 id="同态">同态</h2>
+<h3 id="同态的定义">同态的定义</h3>
+<p>设<span class="math inline">\(A=&lt;S, *, \Delta, k&gt;\)</span>和<span class="math inline">\(A&#39;=&lt;S&#39;, *&#39;, \Delta&#39;, k&#39;&gt;\)</span>是；两个具有相同构成的代数系统，<span class="math inline">\(f:S→S\)</span>，且对<span class="math inline">\(\forall a.b∈S\)</span>有： <span class="math display">\[
+\begin{aligned}
+&amp;f(a*b)=f(a)*’f(b) \\
+&amp;f(\triangle a)=\triangle’f(a) \\
+&amp;f(k)=k’
+\end{aligned}
+\]</span> 则称<span class="math inline">\(f\)</span>为从<span class="math inline">\(A\)</span>到<span class="math inline">\(A&#39;\)</span>的同态映射，简称同态。<span class="math inline">\(A\)</span> 同态于<span class="math inline">\(A\)</span>’,记作$AA^$。</p>
+<h3 id="同态的分类">同态的分类</h3>
+<p>设<span class="math inline">\(f\)</span>是由<span class="math inline">\(A=\{S,*,\triangle,k\}\)</span>到<span class="math inline">\(A^{\prime}=\{S^{\prime},*^{\prime},\triangle^{\prime},k^{\prime}\}\)</span>的一个同态。</p>
+<ul>
+<li>满同态：若<span class="math inline">\(f\)</span>是满射的, 则称<span class="math inline">\(f\)</span>为由<span class="math inline">\(A\)</span>到<span class="math inline">\(A\)</span>’的一个满同态。<span class="math inline">\(A\)</span>就是<span class="math inline">\(A\)</span>在满同态<span class="math inline">\(f\)</span>下一个同态象。</li>
+<li>单一同态： 若<span class="math inline">\(f\)</span>是单射的, 则称<span class="math inline">\(f\)</span>为由<span class="math inline">\(A\)</span>到<span class="math inline">\(A\)</span>的一个单一同态。显然,<span class="math inline">\(A\)</span>在单一同态<span class="math inline">\(f\)</span>下的同态象<span class="math inline">\(&lt;f(S),*^{\prime},\Delta^{\prime},k^{\prime}&gt;\)</span> 与<span class="math inline">\(A\)</span>同构</li>
+<li>同构: 若<span class="math inline">\(f\)</span>是双射的, 则称<span class="math inline">\(f\)</span>为由<span class="math inline">\(A\)</span>到<span class="math inline">\(A\)</span>’的一个同构映射，简称同构。<span class="math inline">\(A\)</span>同构于<span class="math inline">\(A\)</span>’,记作<span class="math inline">\(A\cong A^{\prime}\)</span>。</li>
+<li>自同态: 若<span class="math inline">\(A’=A\)</span>,则称<span class="math inline">\(f\)</span>为<span class="math inline">\(A\)</span>上的自同态。</li>
+<li>自同构: 若<span class="math inline">\(A’=A\)</span>且<span class="math inline">\(f\)</span>是双射的, 则称<span class="math inline">\(f\)</span>为<span class="math inline">\(A\)</span>上的自同构</li>
+</ul>
+<h2 id="同态象的定义">同态象的定义</h2>
+<p>设<span class="math inline">\(f\)</span>是从<span class="math inline">\(A=&lt;S,*,\triangle,k&gt;\)</span>到<span class="math inline">\(A’=&lt;S’,*’,\triangle’,k’&gt;\)</span>的一个同态映射,称<span class="math inline">\(&lt;f(S),*&#39;,△’,k&gt;\)</span>为<span class="math inline">\(A\)</span>在映射<span class="math inline">\(f\)</span> 下的同态象。其中</p>
+<p><span class="math display">\[
+f(S)=\{x\mid x=f(a),a\in S\}\subseteq S’
+\]</span></p>
+<p>下图反映了两个代数系统间的同态关系。</p>
+<p><img src="https://s2.loli.net/2023/10/14/jFz6BqhwKZe5DvC.png" style="zoom:67%;" /></p>
+<p>例题：</p>
+<p>​ 设代数系统&lt;<span class="math inline">\(I,\cdot&gt;\)</span>，<span class="math inline">\(I\)</span>是整数集,<span class="math inline">\(·\)</span>是普通乘法运算。如果我们只对运算结果是正数、负数还是零关心, 那么代数系统&lt;<span class="math inline">\(I,\cdot&gt;\)</span>中的运算结果的特征就可以用另一个代数系统&lt;B , ⊙&gt;的运算结果来表示, 其中<span class="math inline">\(B=\{+,-,0\}\)</span>, <span class="math inline">\(\odot\)</span>是<span class="math inline">\(B\)</span>上的二元运算, 运算表如下所示, 构造从&lt;<span class="math inline">\(I,\cdot\)</span>&gt;到&lt;<span class="math inline">\(B,\odot\)</span>&gt;的同态映射。<img src="https://s2.loli.net/2023/10/14/4vxEdlKzTPynCMI.png" style="zoom:67%;" /> <span class="math display">\[
+\begin{align*}
+&amp; 构造函数f:I→B，\left.f(x)=\quad\left\{\begin{array}{cc}+&amp;x&gt;0\\-&amp;x&lt;0\\0&amp;x=0\end{array}\right.\right.\\
+&amp; 显然∀a,b\in I,f(a\cdot b)=f(a)\odot f(b),所以f\text{是由&lt;}I,\cdot&gt;到&lt;B,\odot\text{&gt;的一个同态}
+\end{align*}
+\]</span></p>
+<h2 id="同态的性质">同态的性质</h2>
+<h3 id="定理1">定理1</h3>
+<p>设<span class="math inline">\(f\)</span>是从<span class="math inline">\(A=&lt;S,*,\triangle,k&gt;\)</span>到<span class="math inline">\(A’=&lt;S’,*’, △’,k&#39;&gt;\)</span>的一个同态映射, 那么<span class="math inline">\(A\)</span>的同态象<span class="math inline">\(&lt;f(S),*&#39;,\triangle‘,k&#39;&gt;\)</span>是<span class="math inline">\(A\)</span>'的子代数。</p>
+<p>证明: (i)因为<span class="math inline">\(f\)</span>是从S到S’的一个映射,所以<span class="math inline">\(f(S)∈S\)</span> (ii)因为<span class="math inline">\(k∈S,f(k)=k\)</span>’,所以<span class="math inline">\(k’\in f(S).\)</span> (iii)任取<span class="math inline">\(a,b\in f(S)\)</span>,存在<span class="math inline">\(x,y∈S\)</span>,使得<span class="math inline">\(f(x)=a,f(y)=b\)</span>。 因为<span class="math inline">\(x*y=z\in S\)</span>, 所以 <span class="math inline">\(a*b=f(x)*&#39;f(y)=f(x*y)=f(z)\in f(S)\)</span>，故<span class="math inline">\(f(S)\)</span>在运算<span class="math inline">\(*&#39;\)</span>下是封闭的 (iv)任取<span class="math inline">\(a\in f(S)\)</span>,存在<span class="math inline">\(x\in S\)</span>使得<span class="math inline">\(f(x)=a\)</span>。 因为<span class="math inline">\(\triangle x\in S\)</span>,所以<span class="math inline">\(\triangle’a=\triangle’f(x){=}f(\triangle x)\in f(S)\)</span>,故<span class="math inline">\(f(S)\)</span>在运算<span class="math inline">\(\triangle\)</span>’下是封闭的。</p>
+<p>综上所述，<span class="math inline">\(&lt;f(S),*&#39;,\triangle‘,k&#39;&gt;\)</span>是<span class="math inline">\(A\)</span>'的子代数。</p>
+<h3 id="定理2">定理2</h3>
+<p>设<span class="math inline">\(f\)</span>是从</p>
 
       </div>
     </div>
@@ -142,7 +183,7 @@
   
   <div class="vhr"></div>
   
-    <a class="post-nav-item-right" href="/2023/10/10/%E5%AD%90%E4%BB%A3%E6%95%B0/">
+    <a class="post-nav-item-right" href="/2023/10/10/%E4%BB%A3%E6%95%B0-(2)-%E5%AD%90%E4%BB%A3%E6%95%B0/">
       <div class="text-align">
         <span class="text-small">下一篇</span>
         <svg t="1670570876164"

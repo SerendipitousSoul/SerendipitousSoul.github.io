@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        数据库系统概述 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">数据库系统概述</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-tag">#数据库</a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/" class="post-tag">#数据模型</a><a href="/tags/E-R%E5%9B%BE/" class="post-tag">#E-R图</a>
+
+
+          <span class="post-date">2023-10-14</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="post-toc-text">基础概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#dbs%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="post-toc-text">DBS主要功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="post-toc-text">数据模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#e-r%E5%9B%BE"><span class="post-toc-text">E-R图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8e-r%E5%9B%BE%E5%BB%BA%E7%AB%8B%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B"><span class="post-toc-text">用E-R图建立概念模型</span></a></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>数据模型三要素：数据结构、基于数据结构的操作、数据完整性约束。这里类似于与代数系统的定义(载体、运算、封闭性)</p>
+<span id="more"></span>
+<h2 id="基础概念">基础概念</h2>
+<ul>
+<li>数据库(DataBase， DB)：长期存储在计算机内、有组织、可共享的数据集合</li>
+<li>数据库管理系统(DataBase Management system，DBMS)：专门用于管理数据库的软件</li>
+<li>数据库系统(DataBase System，DBS)：引入数据库之后的计算机系统</li>
+<li>数据模型是现实世界数据特征的抽象，即现实世界的模 拟。</li>
+</ul>
+<h2 id="dbs主要功能">DBS主要功能</h2>
+<ul>
+<li><strong>数据定义功能</strong>：由DBMS提供的数据定义语言(Data Definition Language, <strong>DDL</strong>)定义数据库中的数据对象</li>
+<li><strong>数据组织、存储和管理</strong>：分类组织、存储和管理各种数据， 包括数据字典、用户数据、数据的存取路径等</li>
+<li><strong>数据操纵功能</strong>：由DBMS提供的数据操纵语言(Data Manipulation Language, <strong>DML</strong>)实现对数据库的查询、插入、删 除和修改</li>
+<li><strong>数据控制功能</strong>：由DBMS提供的数据控制语言(Data Control Languge, <strong>DCL</strong>)实现数据保护和事务管理等功能。包括完整性、 安全性、并发控制、数据库恢复</li>
+<li>数据库的建立和维护功能。</li>
+<li><strong>其他功能</strong>：DBMS与其他软件的通信，与另一个DBMS或文件 系统进行数据交换；异构数据库的互操作等。</li>
+</ul>
+<h2 id="数据模型">数据模型</h2>
+<blockquote>
+<p>数据模型是严格定义的一组概念的集合。精确描 述了系统的静态特性、动态特性和完整性约束条 件</p>
+</blockquote>
+<ul>
+<li>分类
+<ul>
+<li><p>概念模型(信息模型)： 按用户的观点对数据和信息建模，主要用于数据库设计。</p></li>
+<li>逻辑模型：包括层次模型、网状模型、关系模型、面 向对象模型、对象关系模型等。它按计算机系统的观 点对数据建模，用于DBMS实现。</li>
+<li><p>物理模型：是对数据最底层的抽象，描述数据在系统 内部的表示方式和存取方法，在磁盘或磁带上的存储 方式和存取方法。它的具体实现是DBMS的任务</p></li>
+</ul></li>
+<li><strong>数据模型三要素</strong>
+<ul>
+<li><p>数据结构(静态)：数据库组成对象以及对象之间的联系</p></li>
+<li>数据操纵(动态：
+<ul>
+<li><p>数据库中各种对象(型)的实例(值)允许操作的集合，包括 操作及有关的操作规则</p></li>
+<li><p>查询、更新(插入、删除、修改)</p></li>
+</ul></li>
+<li>数据完整性约束
+<ul>
+<li>一组完整性规则：给定的数据模型中数据及其联系所具 有的制约和存储规则</li>
+<li>限定数据库状态以及状态的变化，以保证数据的正确、 有效、相容</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="e-r图">E-R图</h2>
+<ul>
+<li><p>E：客观存在的的各类事物</p>
+<ul>
+<li>实体(Entity):客观存在的各类事物。分为弱实体和强实体</li>
+<li>属性(Attribute):实体所具有的特性。有组合属性、多值属性、 派生属性</li>
+<li>码(Key)：能唯一标识实体的属性集</li>
+<li>域(Domain):属性的取值范围</li>
+<li>实体型(Entity Type):对具有相同属性特征实体的描述。</li>
+<li>实体集(Entity Set):同型实体的集合。</li>
+</ul></li>
+<li><p>R： 联系(Relationship):不同实体集中实体之间的联系，也 可以是同一实体集内实体的联系</p></li>
+<li><p>联系的种类：</p>
+<ul>
+<li><p>一对一联系(1:1)：实体集A中的任一实体，在实体集B中最多有唯一实体和它对应；反之，实体集B中的任一实体，在实体集A中最多有唯一实体和它对应。</p>
+<p><img src="https://s2.loli.net/2023/10/14/qZ4P1DbBzNWtGvu.png" style="zoom:50%;" /></p></li>
+<li><p>一对多联系(1:N)：实体集A中的任一实体，在实体集B中有多个实体和它对应；反之，实体集B中的任一实体，在实体集A 中最多有唯一实体和它对应(一对多和多对一，这里都统一归类于一对多联系)</p>
+<p><img src="https://s2.loli.net/2023/10/14/RV1Ex9TlU5jMNKb.png" style="zoom:50%;" /></p></li>
+<li><p>多对多联系(M:N)：实体集A中的任一实体，在实体集B中有 多个实体和它对应；反之，实体集B中的任一实体，在实体 集A中有多个实体和它对应</p>
+<p><img src="https://s2.loli.net/2023/10/14/WF7Ci4rjchGvmgU.png" /></p></li>
+</ul></li>
+</ul>
+<h2 id="用e-r图建立概念模型">用E-R图建立概念模型</h2>
+<ul>
+<li><p>实体与属性的表示：</p>
+<ul>
+<li><p>实体用方框表示，内部写上实体名</p></li>
+<li><p>属性用属性名表示，内部写上属性名</p></li>
+<li><p>使用无向边将相应的实体相连</p>
+<p><img src="https://s2.loli.net/2023/10/14/ylAZI1JGSHvY4kP.png" style="zoom:67%;" /></p></li>
+</ul></li>
+<li><p>联系的表示(如下图)：</p>
+<p><img src="https://s2.loli.net/2023/10/14/mR4KcijdCfE1vZL.png" style="zoom: 67%;" /></p></li>
+<li><p>实体集之间的联系</p>
+<ul>
+<li><p>两个以上不同实体集的联系</p>
+<p><img src="https://s2.loli.net/2023/10/14/HzAJBTncwrmg8KO.png" style="zoom: 67%;" /></p></li>
+<li><p>同一实体集内部实体的联系</p>
+<p><img src="https://s2.loli.net/2023/10/14/jzDc5b4GCWeBhuK.png" /></p></li>
+</ul></li>
+<li><p>完整的E-R图(实体、属性和联系都要完整)</p>
+<p><img src="https://s2.loli.net/2023/10/14/SY8Ji4IpLxuF6Km.png" style="zoom:67%;" /></p>
+<p><img src="https://s2.loli.net/2023/10/14/euWYELlQ7aDGPXv.png" style="zoom:50%;" /></p></li>
+<li><p>超类和子类</p>
+<ul>
+<li><p>特殊化（specialization，特化）：从实体集中找出与其他实 体具有不同属性集的子集构成新实体的过程</p></li>
+<li><p>一般化（generalization，泛化）：从实体集中提取公共属性 构成新实体的过程</p>
+<p><img src="https://s2.loli.net/2023/10/14/lkhmJVZu6tR4KN1.png" /></p></li>
+</ul></li>
+</ul>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/10/14/%E7%94%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%AE%9E%E4%BD%93(Entity)%E5%92%8C%E8%81%94%E7%B3%BB(Relationship)/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>用计算机来实现实体(Entity)和联系(Relationship)</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/10/12/%E4%BB%A3%E6%95%B0-(4)-%E5%90%8C%E4%BD%99%E5%85%B3%E7%B3%BB/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      代数 (4) 同余关系
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>
