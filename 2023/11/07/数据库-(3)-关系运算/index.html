@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        数据库-(3)-关系运算 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">数据库-(3)-关系运算</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97/" class="post-tag">#关系运算</a><a href="/tags/%E9%80%89%E6%8B%A9/" class="post-tag">#选择</a><a href="/tags/%E6%8A%95%E5%BD%B1/" class="post-tag">#投影</a><a href="/tags/%E8%BF%9E%E6%8E%A5/" class="post-tag">#连接</a><a href="/tags/%E9%99%A4%E6%B3%95/" class="post-tag">#除法</a>
+
+
+          <span class="post-date">2023-11-07</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E5%88%86%E7%B1%BB"><span class="post-toc-text">一、关系运算分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="post-toc-text">二、传统的集合运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B9%B6union"><span class="post-toc-text">1.并(union)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B7%AEexcept"><span class="post-toc-text">2.差(except)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%A4intersection"><span class="post-toc-text">3.交(intersection)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%AC%9B%E5%8D%A1%E5%84%BF%E7%A7%AFcartesian-product"><span class="post-toc-text">4.笛卡儿积(cartesian product)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E4%B8%93%E9%97%A8%E7%9A%84%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97"><span class="post-toc-text">三、专门的关系运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%80%89%E6%8B%A9-selection"><span class="post-toc-text">1.选择 (selection)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%BE%E4%BE%8B"><span class="post-toc-text">举例</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8A%95%E5%BD%B1"><span class="post-toc-text">2.投影</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%BE%E4%BE%8B-1"><span class="post-toc-text">举例</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BF%9E%E6%8E%A5join"><span class="post-toc-text">3.连接(join)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%BE%E4%BE%8B-2"><span class="post-toc-text">举例</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%99%A4%E8%BF%90%E7%AE%97division"><span class="post-toc-text">4.除运算(division)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%BE%E4%BE%8B-3"><span class="post-toc-text">举例</span></a></li></ol></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>关系代数是一种抽象的查询语言，它<u>用对关系的运算来表达查询</u>。运算对象、 运算符、运算结果是运算的三大要素。关系代数的运算按运算符的不同可分为传统的<strong><u>集合运算</u></strong>和<strong><u>专门的关系运算</u></strong>两类</p>
+<span id="more"></span>
+<h2 id="一关系运算分类">一、关系运算分类</h2>
+<ul>
+<li>传统的集合运 算将关系看成<a target="_blank" rel="noopener" href="https://blog.csdn.net/JinYJ2014/article/details/122692865">元组</a>的集合，其运算是从关系的“水平” 方向，即行的角度来进行；</li>
+<li>而专门的关系运算不仅涉及行，而且涉及列。</li>
+<li>前四种是传统的集合运算，后四种是专门的关系运算</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">∩</td>
+<td style="text-align: center;">交</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">差</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">∪</td>
+<td style="text-align: center;">并</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">笛卡尔积</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">σ</td>
+<td style="text-align: center;">选择</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Π</td>
+<td style="text-align: center;">投影</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">⋈</td>
+<td style="text-align: center;">连接</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">÷</td>
+<td style="text-align: center;">除</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二传统的集合运算">二、传统的集合运算</h2>
+<p>传统的集合运算是二目运算，包括并、差、交、笛卡儿积 种运算。</p>
+<p>设关系<span class="math inline">\(R\)</span>和关系<span class="math inline">\(S\)</span>具有相同的目<span class="math inline">\(n\)</span>(即两个关系都有<span class="math inline">\(n\)</span>个属性),且相应的属性取自同一个域，<span class="math inline">\(t\)</span> 是元组变量，<span class="math inline">\(t\in R\)</span> 表示<span class="math inline">\(t\)</span> 是R的一个元组。可以定义并、差、交、笛卡儿积运算如下。</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/06/tsJ5eLAFz9nPgbT.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/06/arT5EJo2MBhtld3.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="并union">1.并(union)</h3>
+<p>并关系 <span class="math inline">\(R\)</span> 与关系 <span class="math inline">\(S\)</span> 的并记作 <span class="math display">\[
+R\cup S=\{r|t\in R\vee t\in S\}
+\]</span> 其结果仍为<span class="math inline">\(n\)</span> 目关系，由属于 <span class="math inline">\(R\)</span> 或属于 <span class="math inline">\(S\)</span> 的元组组成。</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="C:\Users\31303\AppData\Roaming\Typora\typora-user-images\image-20231106200401325.png" alt="image-20231106200401325" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="差except">2.差(except)</h3>
+<p>差关系<span class="math inline">\(R\)</span>与关系 S 的差记作： <span class="math display">\[
+R-S=\{n\in R\wedge t\notin S\}
+\]</span> 其结果关系仍为 <span class="math inline">\(n\)</span> 目关系，由属于$ R$ 而不属于 $S $ 的所有元组组成。</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/06/N13JwWkqK5Gbj82.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="交intersection">3.交(intersection)</h3>
+<p>交关系 R 与关系 S 的交记作 <span class="math display">\[
+R\cap S=\{n|t\in R\wedge t\in S\}
+\]</span> 其结果关系仍为 <span class="math inline">\(n\)</span> 目关系，由既属于 <span class="math inline">\(R\)</span> 又属于 <span class="math inline">\(S\)</span> 的元组组成。关系的交可以用差来表示， 即 <span class="math inline">\(R\cap S=R-(R-S)\)</span>。</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/06/pDOoUdI6gT5G4J3.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="笛卡儿积cartesian-product">4.笛卡儿积(cartesian product)</h3>
+<p>这里的笛卡儿积严格地讲应该是广义的笛卡儿积, 因为这里笛卡儿积的元素是元组。 两个分别为<span class="math inline">\(n\)</span>目和<span class="math inline">\(m\)</span>目的关系<span class="math inline">\(R\)</span>和<span class="math inline">\(S\)</span>的笛卡儿积是一个<span class="math inline">\((n+m)\)</span>列的元组的集合。元组的前 <span class="math inline">\(n\)</span> 列是关系$ R$ 的一个元组，后 <span class="math inline">\(m\)</span> 列是关系 <span class="math inline">\(S\)</span> 的一个元组。若 <span class="math inline">\(R\)</span>有 <span class="math inline">\(k_{1}\)</span> 个元组，<span class="math inline">\(S\)</span> 有<span class="math inline">\(k_{2}\)</span>个元组，则关系 <span class="math inline">\(R\)</span> 和关系$ S$ 的笛卡儿积有 <span class="math inline">\(k_1\times k_2\)</span>个元组。记作 <span class="math display">\[
+R\times S=\{ \widehat{i_{r}t_{s}}|t_{r}\in R\wedge t_{s}\in S\}
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/06/YPIlc9Ebu8vq7j3.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h2 id="三专门的关系运算">三、专门的关系运算</h2>
+<p>下面的运算的举例都基于以下三个关系：</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/06/ha75ByNi13M8gTR.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/06/ntMmRPxwGV6zLue.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/06/MkHfP1NUKtvaLl2.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="选择-selection">1.选择 (selection)</h3>
+<p>选择又叫限制。选择运算实际上是从关系 中选取使逻辑表达式 为真的元组。这是从<strong>行的角度</strong>进行 的运算。</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/06/3x7Nv8GZMl1D5ug.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h4 id="举例">举例</h4>
+<ol type="1">
+<li><p>查询信息系 (IS 系）全体学生。</p>
+<p>在关系<span class="math inline">\(Student\)</span>中查询<span class="math inline">\(Sdept\)</span>为<span class="math inline">\(IS\)</span>的哪几行。(这里的IS是字符型，要加上引号)</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong><span class="math inline">\(σ_{Sdept=&#39;IS&#39;}(Student)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/06/lBTJEq5QaicPpVk.png" /></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>查询年龄小于 20 岁的学生。</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong><span class="math inline">\(σ_{Sage＜20}(Student)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/06/MXORlFWjgcEIDuq.png" /></td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="1">
+<li><p>查询课程学分小于等于3的课程</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong><span class="math inline">\(σ_{Ccredit≤3}(Student)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/06/zjxCaVNF9d1us8g.png" /></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<h3 id="投影">2.投影</h3>
+<p>投影是从关系中选择出若干属性列组成新的关系，投影操作是从<strong>列的角度</strong>进行的运算。</p>
+<h4 id="举例-1">举例</h4>
+<ol type="1">
+<li><p>查询学生的姓名和所在系，即求 <span class="math inline">\(Student\)</span> 关系上学生姓名和所在系两个属性上的投影。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong><span class="math inline">\(Π_{Sname,Sdept}(Student)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/06/Gh1t74fBaKnboqr.png" /></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>查询学生关系 <span class="math inline">\(Student\)</span> 中都有哪些系，即查询关系 <span class="math inline">\(Student\)</span> 上所在系属性上的投影。<strong><u>投影会自动去重</u></strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong><span class="math inline">\(Π_{Sdept}(Student)\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/06/FKlLjShI3w4Yuen.png" /></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<h3 id="连接join">3.连接(join)</h3>
+<p>连接也称为$θ $连接。它是<u>从两个关系的笛卡儿积中选取属性间满足一定条件的元组</u></p>
+<h4 id="举例-2">举例</h4>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/07/t5PN7KuD8kfehT9.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/07/oePqNW4yupnMaKJ.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<ol type="1">
+<li><p>等值连接</p>
+<p>将关系<span class="math inline">\(R\)</span>与关系<span class="math inline">\(S\)</span>中属性<span class="math inline">\(B\)</span>相同的连接成一个新的关系 <span class="math display">\[
+\mathrm{R}\operatorname*{\Join}_{\mathrm{A}=\mathrm{B}}\mathrm{S}
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><img src="https://s2.loli.net/2023/11/07/BbXfpFaJ1kArxI3.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table></li>
+<li><p>自然连接</p>
+<p>​ 自然连接是一种特殊的等值连接。它要求两个关系中进行比较的分量必须是同名的属性组， 并且<u>在结果中把重复的属性列去掉</u></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\mathrm{R}\operatorname*{\Join}\mathrm{S}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/07/MHpYU3O9PZzfExm.png" /></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>非等值连接</p></li>
+</ol>
+<p><span class="math display">\[
+\mathrm{R}\operatorname*{\Join}_{\mathrm{C}＜\mathrm{E}}\mathrm{S}
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/07/ory9Wgz6HKnwBxv.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<ol start="4" type="1">
+<li><p>外连接</p>
+<ul>
+<li>悬浮元组：被舍弃的元组称为悬浮元组。</li>
+<li>在自然连接上加上被<span class="math inline">\(R\)</span>和<span class="math inline">\(S\)</span>中被舍弃的悬浮元组，就叫外连接，只加左边就叫左外连接，只加右边就加右外连接</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">外连接<img src="https://s2.loli.net/2023/11/07/EtTa4kYg9UoXp5O.png" /></th>
+<th style="text-align: center;">左外连接<img src="https://s2.loli.net/2023/11/07/xpH8WQc5eNUqaEh.png" /></th>
+<th style="text-align: center;">右外连接<img src="https://s2.loli.net/2023/11/07/EU7obfcTI5LyV4z.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table></li>
+</ol>
+<h3 id="除运算division">4.除运算(division)</h3>
+<p>​ 设关系 <span class="math inline">\(R\)</span> 除以关系 <span class="math inline">\(S\)</span> 的结果为关系 <span class="math inline">\(T\)</span>, 则 <strong><u><span class="math inline">\(T\)</span> 包含所有在 <span class="math inline">\(R\)</span>但不在 <span class="math inline">\(S\)</span> 中的属性及其值， 且<span class="math inline">\(T\)</span>的元组与<span class="math inline">\(S\)</span>的元组的所有组合都在<span class="math inline">\(R\)</span>中</u></strong>。</p>
+<h4 id="举例-3">举例</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><img src="https://s2.loli.net/2023/11/07/O5HI9oU4Fv86Dt7.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/07/gvQUqjSAxCiIeDT.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(a_1\)</span>的象集为<span class="math inline">\(\{(b_1,c_2),(b_2,c_3),(b_2,c_1)\}\)</span></li>
+<li><span class="math inline">\(a_2\)</span>的象集为<span class="math inline">\(\{(b_3,c_7),(b_2,c_3)\}\)</span></li>
+<li><span class="math inline">\(a_3\)</span>的象集为<span class="math inline">\(\{(b_4 ,c_6)\}\)</span></li>
+<li><span class="math inline">\(a_4\)</span>的象集为<span class="math inline">\(\{(b_6 ,c_6)\}\)</span></li>
+</ul>
+<p>只有<span class="math inline">\(a_1\)</span>的所有象集在<span class="math inline">\(S\)</span>中都包含，于是<span class="math inline">\(R÷S\)</span>如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/07/csC5KVtar9BSfj2.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/11/07/%E6%95%B0%E6%8D%AE%E5%BA%93-(4)-SQL%E5%9F%BA%E7%A1%801/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>数据库-(4)-SQL基础1</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/04/%E4%BB%A3%E6%95%B0-(7)-%E7%89%B9%E6%AE%8A%E7%BE%A4%E5%8F%8A%E5%AD%90%E7%BE%A4/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      代数 (7) 特殊群及子群
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

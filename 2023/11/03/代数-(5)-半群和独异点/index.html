@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        代数 (5) 半群和独异点 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">代数 (5) 半群和独异点</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E5%8D%8A%E7%BE%A4/" class="post-tag">#半群</a><a href="/tags/%E5%AD%90%E5%8D%8A%E7%BE%A4/" class="post-tag">#子半群</a><a href="/tags/%E7%8B%AC%E5%BC%82%E7%82%B9/" class="post-tag">#独异点</a><a href="/tags/%E5%AD%90%E7%8B%AC%E5%BC%82%E7%82%B9/" class="post-tag">#子独异点</a><a href="/tags/%E5%BE%AA%E7%8E%AF%E7%8B%AC%E5%BC%82%E7%82%B9/" class="post-tag">#循环独异点</a>
+
+
+          <span class="post-date">2023-11-03</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E7%9B%B8%E5%85%B3%E5%AE%9A%E4%B9%89"><span class="post-toc-text">一、相关定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8D%8A%E7%BE%A4%E5%AE%9A%E4%B9%89"><span class="post-toc-text">1.半群定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AD%90%E5%8D%8A%E7%BE%A4%E5%AE%9A%E4%B9%89"><span class="post-toc-text">2.子半群定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%8B%AC%E5%BC%82%E7%82%B9%E5%AE%9A%E4%B9%89"><span class="post-toc-text">3.独异点定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AD%90%E7%8B%AC%E5%BC%82%E7%82%B9"><span class="post-toc-text">4.子独异点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%8B%AC%E5%BC%82%E7%82%B9%E5%AE%9A%E4%B9%89"><span class="post-toc-text">5.循环独异点定义</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E7%9B%B8%E5%85%B3%E6%80%A7%E8%B4%A8"><span class="post-toc-text">二、相关性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%86%E4%B8%80"><span class="post-toc-text">1.定理一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%86%E4%BA%8C"><span class="post-toc-text">2.定理二</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E6%80%BB%E7%BB%93"><span class="post-toc-text">三、总结</span></a></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>​ 引入新的代数——半群，独异点以及后面的群都是建立在半群的概念之上。这一篇文章主要是涉及到了半群和独异点，包括其子代数，以及特殊的独异点——循环独异点</p>
+<span id="more"></span>
+<h2 id="一相关定义">一、相关定义</h2>
+<h3 id="半群定义">1.半群定义</h3>
+<p>一个代数系统<span class="math inline">\(&lt;S,*&gt;\)</span>, 其中<span class="math inline">\(S\)</span>是非空集合，<span class="math inline">\(*\)</span>是<span class="math inline">\(S\)</span>上一个二元运算，如果满足：运算<span class="math inline">\(*\)</span>是可结合的，即任取<span class="math inline">\(x,y,z\in\mathbb{S}\)</span> ,有<span class="math inline">\((x^*y)^*z=x^*(y^*z)\)</span>，则称<span class="math inline">\(&lt;S,*&gt;\)</span>为半群。<u>也就是说，代数系统加上可结合性就是半群</u>。</p>
+<h3 id="子半群定义">2.子半群定义</h3>
+<p>​ 设<span class="math inline">\(&lt;S,*&gt;\)</span>是一个半群，<span class="math inline">\(T{\subseteq}S\)</span>且<span class="math inline">\(*\)</span>在<span class="math inline">\(T\)</span>上是封闭的，那么<span class="math inline">\(&lt;T,*&gt;\)</span>是<span class="math inline">\(&lt;S,*&gt;\)</span>的子代数， <span class="math inline">\(&lt;T,*&gt;\)</span>也是一个半群，称为<span class="math inline">\(&lt;S,*&gt;\)</span>的子半群。也就是说<u>半群的子代数也是半群，被称为原来的半群的子半群</u>。</p>
+<h3 id="独异点定义">3.独异点定义</h3>
+<p>​ <u>含有幺元的半群</u>。</p>
+<h3 id="子独异点">4.子独异点</h3>
+<p>​ 设<span class="math inline">\(&lt;S,*,e\)</span>&gt;是一个独异点，<span class="math inline">\(T{\subseteq}S\)</span> 且<span class="math inline">\(*\)</span>在<span class="math inline">\(T\)</span>上是封闭的，<span class="math inline">\(e{\in T}\)</span>, 那么&lt;<span class="math inline">\(T,^*,e\)</span>&gt;是<span class="math inline">\(&lt;S,^*,e\)</span>&gt;的子代数，<span class="math inline">\(&lt;\)</span>T<span class="math inline">\(,*,e\)</span>&gt;也是一个独异点， 称为&lt;<span class="math inline">\(S,^*,e\)</span>&gt;的子独异点。简单来说，<u>子独异点就是独异点的含有相同幺元的子代数</u>。</p>
+<ul>
+<li>原代数系统的子代数</li>
+<li>本身是独异点</li>
+<li>在相同运算下的独异点相同</li>
+</ul>
+<h3 id="循环独异点定义">5.循环独异点定义</h3>
+<p>​ 设<span class="math inline">\(&lt;S,*,e&gt;\)</span>是一个独异点，若存在一个元素<span class="math inline">\(g{\in}S\)</span>,对于<span class="math inline">\(S\)</span>中的每一个元素<span class="math inline">\(a\)</span>, 都有一个对应的<span class="math inline">\(k\in\mathbb{N}\)</span>使得<span class="math inline">\(a=g^k\)</span>(任何元素的零次幂等于幺元<span class="math inline">\(e\)</span> ), 则称此独异点为循环独异点。<span class="math inline">\(g\)</span>称为此循环独异点的生成元。<u>所有元素都由生成元多次运算构成</u>。</p>
+<h2 id="二相关性质">二、相关性质</h2>
+<h3 id="定理一">1.定理一</h3>
+<p>​ 设<span class="math inline">\(&lt;S,*&gt;\)</span>是一个半群，如果<span class="math inline">\(S\)</span>是一个有限集，则必存在<span class="math inline">\(a\in S\)</span>,使得<span class="math inline">\(a^*\alpha=\alpha\)</span>。<u>有限半群必定存在等幂元</u></p>
+<p><img src="https://s2.loli.net/2023/11/03/CaUgoI3eqB4drYb.png" style="zoom: 80%;" /></p>
+<h3 id="定理二">2.定理二</h3>
+<p>​ 独异点中不存在完全相同的两行或者两列。</p>
+<p><img src="https://s2.loli.net/2023/11/03/N8DmRw9SgAsTx5b.png" style="zoom: 80%;" /></p>
+<h2 id="三总结">三、总结</h2>
+<ol type="1">
+<li>半群：
+<ul>
+<li>定义：封闭、可结合</li>
+<li>子半群：子代数、封闭</li>
+<li>半群性质：有限半群中必有等幂元</li>
+<li>交换半群：可交换</li>
+</ul></li>
+<li>独异点 ：
+<ul>
+<li>定义：含幺元半群</li>
+<li>子独异点：子集、封闭、含有幺元<span class="math inline">\(e\)</span>，子代数</li>
+<li>交换独异点：可交换</li>
+<li>循环独异点：有一个生成元<span class="math inline">\(g\)</span>,每个元素都可以用 <span class="math inline">\(g^k\)</span>表示</li>
+</ul></li>
+</ol>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/11/03/%E4%BB%A3%E6%95%B0-(6)-%E7%BE%A4/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>代数 (6) 群</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/10/17/8086%E5%BC%95%E8%84%9A%E7%89%B9%E6%80%A7%E5%88%86%E6%9E%90/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      8086引脚特性分析
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

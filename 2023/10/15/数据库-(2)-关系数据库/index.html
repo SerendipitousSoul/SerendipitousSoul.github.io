@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        关系数据库 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">关系数据库</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-tag">#数据库</a><a href="/tags/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-tag">#关系数据库</a><a href="/tags/%E5%9F%9F/" class="post-tag">#域</a><a href="/tags/%E5%85%83%E7%BB%84/" class="post-tag">#元组</a><a href="/tags/%E5%85%B3%E7%B3%BB/" class="post-tag">#关系</a><a href="/tags/%E5%80%99%E9%80%89%E7%A0%81/" class="post-tag">#候选码</a><a href="/tags/%E4%B8%BB%E7%A0%81/" class="post-tag">#主码</a><a href="/tags/%E4%B8%BB%E5%B1%9E%E6%80%A7/" class="post-tag">#主属性</a><a href="/tags/%E5%A4%96%E7%A0%81/" class="post-tag">#外码</a><a href="/tags/%E5%8F%82%E7%85%A7%E5%85%B3%E7%B3%BB/" class="post-tag">#参照关系</a><a href="/tags/%E7%9B%AE%E6%A0%87%E5%85%B3%E7%B3%BB-%E8%A2%AB%E5%8F%82%E7%85%A7%E5%85%B3%E7%B3%BB/" class="post-tag">#目标关系(被参照关系)</a>
+
+
+          <span class="post-date">2023-10-15</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%A5%E5%8F%8A%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89%E8%BD%BD%E4%BD%93"><span class="post-toc-text">关系数据库以及形式化定义——载体</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">关系的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB%E5%BA%94%E8%AF%A5%E5%85%B7%E6%9C%89%E7%9A%84%E5%85%AD%E6%9D%A1%E6%80%A7%E8%B4%A8"><span class="post-toc-text">关系应该具有的六条性质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="post-toc-text">相关概念</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB%E6%93%8D%E4%BD%9C"><span class="post-toc-text">关系操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB%E6%93%8D%E4%BD%9C"><span class="post-toc-text">基本的关系操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB%E8%AF%AD%E8%A8%80"><span class="post-toc-text">关系语言</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="post-toc-text">关系的完整性——约束</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7%E8%A7%84%E5%88%99"><span class="post-toc-text">实体完整性规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7%E8%A7%84%E5%88%99"><span class="post-toc-text">参照完整性规则</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5"><span class="post-toc-text">几个概念</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7%E8%A7%84%E5%88%99-1"><span class="post-toc-text">参照完整性规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E5%AE%8C%E6%95%B4%E6%80%A7%E8%A7%84%E5%88%99"><span class="post-toc-text">用户定义完整性规则</span></a></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h2 id="关系数据库以及形式化定义载体">关系数据库以及形式化定义——载体</h2>
+<p><strong>实体和联系都用关系这种单一的数据结构来实现</strong></p>
+<h3 id="关系的定义">关系的定义</h3>
+<ul>
+<li><p>域(Domain)：一组具有相同数据类型的值的集合。如整 数、字符串等。</p></li>
+<li><p>笛卡尔积(Cartesian Product)：给定一组域$D1, D2, …, Dn $(可相同)， <span class="math inline">\(D1, D2, …, Dn\)</span>上的笛卡尔积为： <span class="math inline">\(D1× D2 × … × Dn＝\)</span>{ <span class="math inline">\((d1, d2, …, dn) | di = 1, 2 , …, n\)</span>} ，笛卡尔积的很多结果都是无意义的，有意义的一般都是其子集构成的关系</p></li>
+<li><p><span class="math inline">\((d1, d2, …, dn)\)</span>称为一个<strong>元组</strong>(Tuple)</p></li>
+<li><p><span class="math inline">\(di\)</span>叫作<strong>元组</strong><span class="math inline">\((d1, d2, …, dn)\)</span>的第$i $个分量(component)</p></li>
+<li><p>关系(Relation)： <span class="math inline">\(D1× D2 × … × Dn\)</span>的一个子集叫做域 <span class="math inline">\(D1, D2, …, Dn\)</span>上的关系。</p></li>
+<li><p>定义在<span class="math inline">\(n\)</span>个域上的关系称为<span class="math inline">\(n\)</span>元(<span class="math inline">\(n\)</span>目)关系</p></li>
+<li><p>例子</p>
+<ul>
+<li><p>给定域<span class="math inline">\(name=\)</span>{<span class="math inline">\(王小明，李莉\)</span>}，<span class="math inline">\(sex=\)</span>{<span class="math inline">\(男，女\)</span>}，则<span class="math inline">\(name ×sex\)</span>={<span class="math inline">\((王小明，男)，(王小明，女)，\)</span><span class="math inline">\((李莉，男)，(李 莉，女)\)</span>}</p></li>
+<li><p>一个由<span class="math inline">\(name×sex\)</span>的子集构成的，有意义的关系如下：</p>
+<p><img src="https://s2.loli.net/2023/10/15/J7U4rbDlAnXYFmS.png" style="zoom:67%;" /></p></li>
+</ul></li>
+</ul>
+<h3 id="关系应该具有的六条性质">关系应该具有的六条性质</h3>
+<ol type="1">
+<li>列是同质的(来自同一个集合，或者说是域)</li>
+<li>不同的列可以出自同一个域(作笛卡尔积的集合可以重复)</li>
+<li>任意两个元组不能完全相同(笛卡尔积本质还是集合，集合具有互异性)</li>
+<li>列序无关性，(这里每个元组的括号是圆括号，在离散数学里面表示顺序交换仍然相同)</li>
+<li>行序无关性(这个由元组构成的集合具有无序性)</li>
+<li>分量必须取原子值(不能再分割了，都是基于自己定义的集合的)。</li>
+</ol>
+<h3 id="相关概念">相关概念</h3>
+<ul>
+<li><p><strong>候选码(Candidate Key)：能唯一标识元组的属性(组)</strong>(可以有多个，见下面例子)</p></li>
+<li><p><strong>主码(Primary Key)：多个候选码中选定一个作主码</strong></p></li>
+<li><p><strong>主属性(Prime Attribute)：候选码中的各个属性</strong></p></li>
+<li><p><strong>非主属性(Non-Key Attribute)：不出现在任何候选码中的属性</strong></p></li>
+</ul>
+<p><img src="https://s2.loli.net/2023/10/15/OzqNUAtmrsBjH9g.png" style="zoom: 50%;" /></p>
+<ul>
+<li><p>关系的型与值</p>
+<ul>
+<li>关系(表)的型：关系的结构(字段名、字段个数、域等)</li>
+<li>关系(表)的值：关系中具体的元组，也称关系的实例 (Instance)</li>
+</ul></li>
+<li><p>关系模式(Relation Schema)即关系的型的定义</p>
+<p><img src="https://s2.loli.net/2023/10/15/7tG8njIPsqLxgFX.png" style="zoom:50%;" /></p></li>
+</ul>
+<h2 id="关系操作">关系操作</h2>
+<h3 id="基本的关系操作">基本的关系操作</h3>
+<blockquote>
+<p>五种基本的操作指的是——并(Union)、差(Difference)、广义笛卡儿积、选择(Select)、投影(Project)【UD广SP】</p>
+</blockquote>
+<ul>
+<li>查询(Query)
+<ul>
+<li><strong>并(Union)</strong>、交(Intersection)、<strong>差(Difference)</strong>、广义笛卡尔积、<strong>选择(Select)</strong>、<strong>投影(Project)</strong>、连接(Join)、除(Divide)</li>
+</ul></li>
+<li>插入(Insert)</li>
+<li>删除(Delete)</li>
+<li>修改(Update)</li>
+</ul>
+<p><strong>关系操作的特点：操作对象和操纵结果都是关系(体现了封闭性)</strong></p>
+<h3 id="关系语言">关系语言</h3>
+<ul>
+<li>关系代数</li>
+<li>关系演算(逻辑)(基于一阶逻辑)
+<ul>
+<li>元组演算(一行)</li>
+<li>域演算(一列)</li>
+</ul></li>
+<li><strong>SQL</strong>(用得最多)</li>
+<li>关系语言特点
+<ul>
+<li>关系语言是一种<u>高度非过程化</u>的语言</li>
+<li>关系语言是完备的</li>
+<li>关系代数、元组关系演算和域关系演算三种语言在表达能力上完全等价</li>
+</ul></li>
+</ul>
+<h2 id="关系的完整性约束">关系的完整性——约束</h2>
+<h3 id="实体完整性规则">实体完整性规则</h3>
+<p>若属性A是基本关系R的主属性，则属性A不能取空值。</p>
+<ol type="1">
+<li><strong>实体完整性规则是针对基本关系而言的</strong>。一个基本表通常对应现实世界的一个实体集或多对多联系。</li>
+<li>现实世界中的实体和实体间的联系都是可区分的，即它们<strong>具有某种唯一性标识(主码)</strong>。</li>
+<li><strong>空值就是“不知道”或“无意义”的值，不是空格字符</strong>。主属性取空值，就说明存在某个不可标识的实体，这与第2点矛盾(用NULL表示空)</li>
+</ol>
+<h3 id="参照完整性规则">参照完整性规则</h3>
+<h4 id="几个概念">几个概念</h4>
+<p>设<span class="math inline">\(F\)</span>是基本关系<span class="math inline">\(R\)</span>的一个或一组属性，但不是关系<span class="math inline">\(R\)</span>的码。 如果<span class="math inline">\(F\)</span>与<u>基本关系<span class="math inline">\(S\)</span>的码<span class="math inline">\(K_s\)</span></u>相对应，则称<span class="math inline">\(F\)</span>是基本关系<span class="math inline">\(R\)</span>的<strong>外码(Foreign Key)</strong>。基本关系<span class="math inline">\(R\)</span>称为<strong>参照关系</strong>(Referencing Relation)，基本关系<span class="math inline">\(S\)</span>称为<strong>被参照关系(Referenced Relation) 或目标关系(Target Relation)</strong></p>
+<ol type="1">
+<li>关系<span class="math inline">\(R\)</span>和<span class="math inline">\(S\)</span>不一定是不同的关系(可以参考)</li>
+<li>码<span class="math inline">\(K_s\)</span>和外码<span class="math inline">\(F\)</span>必须定义在同一个(或同一组)域上(有参考关系)</li>
+<li>外码并不一定要与相应的主码同名(当外码与相应的主码属于不同关系时，往往取相同的名字，以便于识别，但是也存在两者处于同一关系下的情况)</li>
+</ol>
+<p><img src="https://s2.loli.net/2023/10/15/C14XJzvEmxhGbRc.png" style="zoom:67%;" /></p>
+<p>上图中：</p>
+<ul>
+<li>课程表中的<span class="math inline">\(Cpno\)</span>参考了课程表中的<span class="math inline">\(Cno\)</span> (自己参考自己，外码的值来自被参照关系，也可以为空)</li>
+<li>成绩表中的<span class="math inline">\(Sno\)</span>参考了学生表中的<span class="math inline">\(Sno\)</span> (前者是外码，此时两者同名)</li>
+<li>成绩表中的<span class="math inline">\(Cno\)</span>参考了课程表中的<span class="math inline">\(Cno\)</span> (前者是外码，此时两者同名)</li>
+</ul>
+<h3 id="参照完整性规则-1">参照完整性规则</h3>
+<p>若属性(或属性组)<span class="math inline">\(F\)</span>是基本关系<span class="math inline">\(R\)</span>的外码，它与基本关系<span class="math inline">\(S\)</span>的码<span class="math inline">\(K_s\)</span>相对应(基本关系<span class="math inline">\(R\)</span>和<span class="math inline">\(S\)</span>不一定是不同的关系)，则对于<span class="math inline">\(R\)</span>中每个元组在<span class="math inline">\(F\)</span>上的值必须为以下两者之一：</p>
+<ul>
+<li>或者取空值(<span class="math inline">\(F\)</span>的每个属性值均为空值)<br />
+</li>
+<li>或者等于<span class="math inline">\(S\)</span>中某个元组的码值。</li>
+</ul>
+<p>举个例子：</p>
+<ul>
+<li><p>在前面的<span class="math inline">\(SC\)</span>表中，<span class="math inline">\(Sno\)</span>只能取S表中存在的学号，<span class="math inline">\(Cno\)</span>也只能取已存在的课程号，但<strong>两者都不能取空值，因为<span class="math inline">\(Sno\)</span>和<span class="math inline">\(Cno\)</span>都是主属性</strong>。</p></li>
+<li><p>外码中的属性如果不是主属性，则可以取空值，此时<strong>外码中的每个属性均为空值</strong></p>
+<ul>
+<li>可以看到考生录取表中的<span class="math inline">\(Yxdh\)</span>和<span class="math inline">\(Zydh\)</span>是参考的院校专业表里面的<span class="math inline">\(Yxdh\)</span>和<span class="math inline">\(Zydh\)</span>。这两者同时继承被参考关系的值，或者全为空值，否则都是不合法的。</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/10/15/cY254CtekmIENpB.png" style="zoom:67%;" /></p></li>
+</ul>
+<h3 id="用户定义完整性规则">用户定义完整性规则</h3>
+<ul>
+<li>用户定义的完整性是针对某一具体关系数据库的约束条件， 反映某一具体应用所涉及的数据<strong>必须满足的语义要求</strong>。如性 别只能取“男” 、 “女”值，成绩必须在0~100分之间。</li>
+<li>关系模型应提供定义和检验这类完整性的机制，以便用统一 的系统的方法处理它们，而不要由应用程序承担这一功能。 <strong>通常由DBMS的Check约束提供这类检查</strong></li>
+</ul>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/10/17/8086%E5%BC%95%E8%84%9A%E7%89%B9%E6%80%A7%E5%88%86%E6%9E%90/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>8086引脚特性分析</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/10/14/%E7%94%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%AE%9E%E4%BD%93(Entity)%E5%92%8C%E8%81%94%E7%B3%BB(Relationship)/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      用计算机来实现实体(Entity)和联系(Relationship)
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

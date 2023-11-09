@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        代数 (7) 特殊群及子群 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">代数 (7) 特殊群及子群</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E5%AD%90%E7%BE%A4/" class="post-tag">#子群</a><a href="/tags/%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4-%E4%BA%A4%E6%8D%A2%E7%BE%A4/" class="post-tag">#阿贝尔群(交换群)</a><a href="/tags/%E5%BE%AA%E7%8E%AF%E7%BE%A4/" class="post-tag">#循环群</a><a href="/tags/%E5%B9%B3%E5%87%A1%E5%AD%90%E7%BE%A4/" class="post-tag">#平凡子群</a><a href="/tags/%E7%94%9F%E6%88%90/" class="post-tag">#生成</a>
+
+
+          <span class="post-date">2023-11-04</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E7%BE%A4"><span class="post-toc-text">特殊的群</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4%E4%BA%A4%E6%8D%A2%E7%BE%A4"><span class="post-toc-text">1.阿贝尔群(交换群)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BE%A4"><span class="post-toc-text">2.循环群</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BE%A4%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E8%B4%A8"><span class="post-toc-text">循环群的相关性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BE%A4%E4%B8%80%E5%AE%9A%E6%98%AF%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4%E4%BA%A4%E6%8D%A2%E7%BE%A4"><span class="post-toc-text">1.循环群一定是阿贝尔群(交换群)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BE%A4%E7%9A%84%E7%94%9F%E6%88%90%E5%85%83%E7%9A%84%E9%98%B6%E6%95%B0%E5%B0%B1%E6%98%AF%E7%BE%A4%E7%9A%84%E9%98%B6%E6%95%B0"><span class="post-toc-text">2.循环群的生成元的阶数就是群的阶数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AD%90%E7%BE%A4"><span class="post-toc-text">子群</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AD%90%E7%BE%A4-1"><span class="post-toc-text">子群</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B9%B3%E5%87%A1%E5%AD%90%E7%BE%A4"><span class="post-toc-text">平凡子群</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AD%90%E7%BE%A4%E5%88%A4%E5%AE%9A%E5%AE%9A%E7%90%86"><span class="post-toc-text">子群判定定理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%8D%E9%99%90%E5%AE%9A%E8%BD%BD%E4%BD%93%E8%BF%90%E7%AE%97%E5%B0%81%E9%97%AD%E5%8A%A0%E9%80%86%E5%85%83%E5%8C%85%E5%90%AB"><span class="post-toc-text">1.不限定载体，运算封闭加逆元包含</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%99%90%E5%AE%9A%E8%BD%BD%E4%BD%93%E4%B8%BA%E6%9C%89%E9%99%90%E9%9B%86%E5%8F%AA%E9%9C%80%E4%BF%9D%E8%AF%81%E5%B0%81%E9%97%AD%E6%80%A7%E5%8D%B3%E5%8F%AF"><span class="post-toc-text">2.限定载体为有限集，只需保证封闭性即可</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%9D%9E%E7%A9%BA%E5%AD%90%E9%9B%86%E4%B8%8B%E7%9A%84%E5%88%A4%E5%AE%9A"><span class="post-toc-text">3. 非空子集下的判定</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BE%A4%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="post-toc-text">循环群的性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BE%A4%E7%9A%84%E5%AD%90%E7%BE%A4%E5%BF%85%E6%98%AF%E5%BE%AA%E7%8E%AF%E7%BE%A4"><span class="post-toc-text">1.循环群的子群必是循环群</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BE%8B%E9%A2%98"><span class="post-toc-text">相关例题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%BE%AA%E7%8E%AF%E7%BE%A4%E5%B9%B6%E6%B1%82%E5%B9%BA%E5%85%83%E5%92%8C%E7%94%9F%E6%88%90%E5%85%83"><span class="post-toc-text">1.判断是否是循环群，并求幺元和生成元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B1%82%E5%AD%90%E7%BE%A4"><span class="post-toc-text">2.求子群</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AD%90%E7%BE%A4%E5%88%A4%E5%AE%9A"><span class="post-toc-text">3.子群判定</span></a></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>主要讲了具有生成元的循环群以及群的判定定理</p>
+<span id="more"></span>
+<h2 id="特殊的群">特殊的群</h2>
+<h3 id="阿贝尔群交换群">1.阿贝尔群(交换群)</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是群，如果运算<span class="math inline">\(*\)</span>是可交换的，则称该群为阿贝尔群或者交换群。</p>
+<h3 id="循环群">2.循环群</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是群，若存在一个元素<span class="math inline">\(g\in G\)</span>,使得<span class="math inline">\(G\)</span>中每一个元素<span class="math inline">\(a\in G\)</span>都能表示成<span class="math inline">\(g^i\)</span>(<span class="math inline">\(i\in I,I\)</span>是整数集合)的形式，则称<span class="math inline">\(&lt;G,*&gt;\)</span>为循环群，<span class="math inline">\(g\)</span>是循环群<span class="math inline">\(&lt;G,*&gt;\)</span>的一个生成元。</p>
+<p><strong>注：一个循环群可能存在多个生成元</strong></p>
+<h2 id="循环群的相关性质">循环群的相关性质</h2>
+<h3 id="循环群一定是阿贝尔群交换群">1.循环群一定是阿贝尔群(交换群)</h3>
+<p><img src="https://s2.loli.net/2023/11/04/puavyl4oOG5fnbj.png" style="zoom:80%;" /></p>
+<h3 id="循环群的生成元的阶数就是群的阶数">2.循环群的生成元的阶数就是群的阶数</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是由<span class="math inline">\(g\in G\)</span>为生成元的有限循环群，<span class="math inline">\(|G|{=}n\)</span>,则有</p>
+<ul>
+<li><span class="math inline">\(n\)</span>是使<span class="math inline">\(g^n=e\)</span>的最小正整数,即生成元的阶数为<span class="math inline">\(n\)</span></li>
+<li><span class="math inline">\(G=\{g^1,g^2,...,g^n=e,\}\)</span>。</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/11/04/gio6JhabpKmIn2u.png" style="zoom:80%;" /></p>
+<h2 id="子群">子群</h2>
+<h3 id="子群-1">子群</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，<span class="math inline">\(S\)</span>是<span class="math inline">\(G\)</span>的非空子集， 并满足以下条件：</p>
+<ul>
+<li>∀<span class="math inline">\(a,b∈{S}\)</span>, 有<span class="math inline">\(a*b∈S\)</span>(<span class="math inline">\(*\)</span>运算对<span class="math inline">\(S\)</span>封闭)</li>
+<li>∀<span class="math inline">\(a∈S\)</span>,有<span class="math inline">\(a^{-1}∈S\)</span>(同时包含幺元和逆元)</li>
+<li><span class="math inline">\(e∈S\)</span>, <span class="math inline">\(e\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的幺元(继承幺元)</li>
+</ul>
+<p>则称<span class="math inline">\(&lt;S,*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群</p>
+<h3 id="平凡子群">平凡子群</h3>
+<p><span class="math inline">\(&lt;G,*&gt;\)</span>和<span class="math inline">\(&lt;\{e\},*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的平凡子群</p>
+<h2 id="子群判定定理">子群判定定理</h2>
+<h3 id="不限定载体运算封闭加逆元包含">1.不限定载体，运算封闭加逆元包含</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，<span class="math inline">\(S\)</span>是<span class="math inline">\(G\)</span>的非空子集，若运算<span class="math inline">\(*\)</span>在<span class="math inline">\(S\)</span>上封闭，并且<span class="math inline">\(S\)</span>中的每个元素都有逆元，则<span class="math inline">\(&lt;S,*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群。</p>
+<p><img src="https://s2.loli.net/2023/11/05/BnH5hAKLkp6bXvM.png" style="zoom:80%;" /></p>
+<h3 id="限定载体为有限集只需保证封闭性即可">2.限定载体为有限集，只需保证封闭性即可</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，<span class="math inline">\(S\)</span>是<span class="math inline">\(G\)</span>的非空子集，如果<span class="math inline">\(S\)</span>是有限集，那么只要运算<span class="math inline">\(*\)</span>在<span class="math inline">\(S\)</span>上封闭，<span class="math inline">\(&lt;S,*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群。</p>
+<p><img src="https://s2.loli.net/2023/11/05/NQ9wizgMRpFjD3X.png" style="zoom:80%;" /></p>
+<h3 id="非空子集下的判定">3. 非空子集下的判定</h3>
+<p>设&lt;<span class="math inline">\(G,*&gt;\)</span>是一个群，<span class="math inline">\(S\)</span>是<span class="math inline">\(G\)</span>的非空子集，如果对于<span class="math inline">\(S\)</span>中的任意元素<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>,有<span class="math inline">\(a^*b^{-1}\in S\)</span>,则<span class="math inline">\(&lt;S,*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群。</p>
+<p><img src="https://s2.loli.net/2023/11/05/ydkG1cxSsYOVaze.png" style="zoom:80%;" /></p>
+<h2 id="循环群的性质">循环群的性质</h2>
+<h3 id="循环群的子群必是循环群">1.循环群的子群必是循环群</h3>
+<p><img src="https://s2.loli.net/2023/11/05/7NmTsfOXvoQhHgA.png" style="zoom:80%;" /></p>
+<h2 id="相关例题">相关例题</h2>
+<h3 id="判断是否是循环群并求幺元和生成元">1.判断是否是循环群，并求幺元和生成元</h3>
+<p>​ <span class="math inline">\(&lt;I,+&gt;\)</span>是无限循环群，幺元是<span class="math inline">\(0\)</span>，生成元是<span class="math inline">\(+1\)</span>和<span class="math inline">\(-1\)</span>。</p>
+<h3 id="求子群">2.求子群</h3>
+<p>求出<span class="math inline">\(&lt;N_{6},+_6&gt;\)</span>的所有子群。</p>
+<p><img src="https://s2.loli.net/2023/11/05/P6DajYczWmHvR93.png" style="zoom:80%;" /></p>
+<h3 id="子群判定">3.子群判定</h3>
+<p>设<span class="math inline">\(&lt;H,*&gt;\)</span>和<span class="math inline">\(&lt;K,*&gt;\)</span>都是群<span class="math inline">\(&lt;G,*&gt;\)</span>的子群，证明<span class="math inline">\(&lt;H∩K,*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群</p>
+<p><img src="https://s2.loli.net/2023/11/05/g9GH3AjRb6nN512.png" style="zoom:80%;" /></p>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是群，任取<span class="math inline">\(a\in G\)</span>,令<span class="math inline">\(H=\{x|x^*a=a^*x,x\in G\}\)</span>。试证明<span class="math inline">\(&lt;H,*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群。</p>
+<p><img src="https://s2.loli.net/2023/11/05/r4qwd19GM5uCnPJ.png" style="zoom:80%;" /></p>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/11/07/%E6%95%B0%E6%8D%AE%E5%BA%93-(3)-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>数据库-(3)-关系运算</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/03/%E4%BB%A3%E6%95%B0-(6)-%E7%BE%A4/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      代数 (6) 群
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

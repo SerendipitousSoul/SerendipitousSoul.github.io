@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        数据库-(4)-SQL基础1 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">数据库-(4)-SQL基础1</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2023-11-07</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="post-toc-text">基础概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AD%A6%E7%94%9F%E8%AF%BE%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">学生－课程数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sql%E5%AE%9A%E4%B9%89%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">SQL定义语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="post-toc-text">模式的定义与删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">模式的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">删除模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="post-toc-text">基本表的定义、删除与修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%A1%A8"><span class="post-toc-text">模式与表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4"><span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9"><span class="post-toc-text">修改</span></a></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h2 id="基础概念">基础概念</h2>
+<ol type="1">
+<li><p>基本表</p>
+<ul>
+<li>本身独立存在的表</li>
+<li>SQL中一个关系就对应一个基本表</li>
+<li>一个或多个基本表对应一个存储文件</li>
+<li>一个表可以带若干索引</li>
+</ul></li>
+<li><p>存储文件</p>
+<ul>
+<li>逻辑结构组成了关系数据库的内模式</li>
+<li>物理结构是任意的，对用户透明</li>
+</ul></li>
+<li><p>视图</p>
+<ul>
+<li>从一个或几个基本表导出的表</li>
+<li>数据库中只存放视图的定义，而不存放视图对应的数据(避免重复操作)</li>
+<li>视图可以是一个虚表(实际数据库中不存在的表)</li>
+<li>用户可以在视图之上再定义视图</li>
+</ul></li>
+</ol>
+<p><img src="https://s2.loli.net/2023/11/07/BzQgJAaXGLqx5dM.png" /></p>
+<h2 id="学生课程数据库">学生－课程数据库</h2>
+<ul>
+<li>学生表：<span class="math inline">\(Student(\underline{Sno},Sname,Ssex,Sage,Sdept)\)</span></li>
+<li>课程表：$Course(,Cname,Cpno,Ccredit) $</li>
+<li>学生选课表：<span class="math inline">\(SC(\underline{Sno,Cno},Grade)\)</span></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/07/76Hwv5VK4PsorRZ.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/07/bEgC7p43QScFdBM.png" /></th>
+<th><img src="https://s2.loli.net/2023/11/07/hKv2XJjC4doyEFV.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h2 id="sql定义语句">SQL定义语句</h2>
+<table>
+<thead>
+<tr class="header">
+<th><img src="https://s2.loli.net/2023/11/07/VCOjINXzoysxuqG.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h2 id="模式的定义与删除">模式的定义与删除</h2>
+<h3 id="模式的定义">模式的定义</h3>
+<ol type="1">
+<li><p>为用户 <span class="math inline">\(WANG\)</span> 定义一个学生－课程模式 <span class="math inline">\(S-T\)</span></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> SCHEMA &quot;S-T&quot; <span class="hljs-keyword">AUTHORIZATION</span> WANG;<br></code></pre></td></tr></table></figure></li>
+<li><p>不指定模式，模式名隐含为用户名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> SCHEMA <span class="hljs-keyword">AUTHORIZATION</span> WANG;<br></code></pre></td></tr></table></figure></li>
+<li><p>建立模式的同时建立相关表：为用户 <span class="math inline">\(ZHANG\)</span> 创建一个模式 <span class="math inline">\(TEST\)</span>, 并且在其中定义一个表 <span class="math inline">\(TAB1\)</span></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> SCHEMA &quot;TEST&quot; <span class="hljs-keyword">AUTHORIZATION</span> ZHANG;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> TAB1(<br>	COL1 <span class="hljs-type">SMALLINT</span>,<br>    COL2 <span class="hljs-type">INT</span>,<br>	COL3 CHART(<span class="hljs-number">20</span>),<br>    COL4 <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">10</span>,<span class="hljs-number">3</span>), <br>    COL5 <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">5</span>,<span class="hljs-number">2</span>) <span class="hljs-comment">/*最后一行没有逗号 */</span><br>); <span class="hljs-comment">/*整个语句写完之后才加上&quot;;&quot; */</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="删除模式">删除模式</h3>
+<ol type="1">
+<li><p>级联模式删除</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">DROP</span> SCHEMA ZHANG CASCADE;<span class="hljs-comment">/*级联模式下删除，所有相关联的定义都将删除，就比如里面定义的表也会被删除*/</span><br></code></pre></td></tr></table></figure></li>
+<li><p>限制模式下删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">DROP ZHANG RESTRICT;/*级联模式下删除，所有相关联的定义都将删除*/<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="基本表的定义删除与修改">基本表的定义、删除与修改</h2>
+<h3 id="定义">定义</h3>
+<ol type="1">
+<li><p>建立一个学生表Student</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student(<br>    Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>)<span class="hljs-keyword">PRIMARY</span> KEY, <span class="hljs-comment">/*列级完整性约束条件，这里是表示主码*/</span><br>    Sname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>)<span class="hljs-keyword">UNIQUE</span>, <span class="hljs-comment">/*取唯一值*/</span><br>    Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br>    Sage <span class="hljs-type">SMALLINT</span>,<br>    Sdept <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>)<br>);<br></code></pre></td></tr></table></figure></li>
+<li><p>建立一个课程表&quot;Course&quot;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Course(<br>    Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>)<span class="hljs-keyword">PRIMARY</span> KEY,<br>    Cname <span class="hljs-type">CHAR</span>(<span class="hljs-number">40</span>), <br>    Cpno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>),<br>    Ccredit <span class="hljs-type">SMALLINT</span>,<br>    <span class="hljs-keyword">FOREIGN</span> KEY(Cpno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*参照完整性，Cpno是外码，被参照表是Course，被参照列是Cno*/</span><br>);<br><span class="hljs-comment">/*参照表和被参照表可以是同一个表*/</span><br></code></pre></td></tr></table></figure></li>
+<li><p>建立学生选课SC</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC (<br>    Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>),<br>    Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>),<br>    Grade <span class="hljs-type">SMALLINT</span>,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (Sno, Cno),<span class="hljs-comment">/*主码由两个属性组成,必须使用表级完整性进行定义*/</span><br>    <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno),<br>    <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<br>);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="数据类型">数据类型</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">数据类型</th>
+<th style="text-align: center;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">CHAR(n), CHARACTER(n)</td>
+<td style="text-align: center;">长度为n的定长字符串</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">VARCHAR(n), CHARACTERVARYING(n)</td>
+<td style="text-align: center;">最大长度为n的变长字符串</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">CLOB</td>
+<td style="text-align: center;">字符串大对象</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">BLOB</td>
+<td style="text-align: center;">二进制大对象</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">INT, INTEGER</td>
+<td style="text-align: center;">长整数(4字节)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">SMALLINT</td>
+<td style="text-align: center;">短整数(2字节)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">BIGINT</td>
+<td style="text-align: center;">大整数(8字节)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">NUMERIC(p,d)</td>
+<td style="text-align: center;">定点数,由p位数字(不包括符号、小数点)组成,小数点后面有d 位数字</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">DECIMAL(p,d), DEC(p,d)</td>
+<td style="text-align: center;">同NUMERIC</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">REAL</td>
+<td style="text-align: center;">取决于机器精度的单精度浮点数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">DOUBLE PRECISION</td>
+<td style="text-align: center;">取决于机器精度的双精度浮点数</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">FLOAT(n)</td>
+<td style="text-align: center;">可选精度的浮点数,精度至少为n位数字</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">BOOLEAN</td>
+<td style="text-align: center;">逻辑布尔量</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">DATE</td>
+<td style="text-align: center;">日期,包含年、月、日,格式为YYYY-MM-DD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TLME</td>
+<td style="text-align: center;">时间,包含一日的时、分、秒,格式为HH:MM:SS</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TIMESTAMP</td>
+<td style="text-align: center;">时间戳类型</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">INTERVAL</td>
+<td style="text-align: center;">时间间隔类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="模式与表">模式与表</h3>
+<ul>
+<li>显示</li>
+</ul>
+<h3 id="删除">删除</h3>
+<h3 id="修改">修改</h3>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <div class="post-nav-item-left"></div>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/07/%E6%95%B0%E6%8D%AE%E5%BA%93-(3)-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      数据库-(3)-关系运算
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

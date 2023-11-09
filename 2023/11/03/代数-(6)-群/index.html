@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        代数 (6) 群 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">代数 (6) 群</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E7%BE%A4/" class="post-tag">#群</a><a href="/tags/%E7%BE%A4%E7%9A%84%E9%98%B6%E6%95%B0/" class="post-tag">#群的阶数</a><a href="/tags/%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6/" class="post-tag">#元素的阶</a><a href="/tags/%E6%9C%89%E9%99%90%E7%BE%A4/" class="post-tag">#有限群</a><a href="/tags/%E9%B8%BD%E5%B7%A2%E5%8E%9F%E7%90%86/" class="post-tag">#鸽巢原理</a>
+
+
+          <span class="post-date">2023-11-03</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E5%AE%9A%E4%B9%89"><span class="post-toc-text">一、定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BE%A4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">1.群的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%89%E9%99%90%E7%BE%A4"><span class="post-toc-text">2.有限群</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%97%A0%E9%99%90%E7%BE%A4"><span class="post-toc-text">3.无限群</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BE%A4%E7%9A%84%E9%98%B6%E6%95%B0"><span class="post-toc-text">4.群的阶数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BE%A4%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6"><span class="post-toc-text">5.群中元素的阶</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E6%80%A7%E8%B4%A8"><span class="post-toc-text">二、性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BE%A4%E4%B8%AD%E6%97%A0%E9%9B%B6%E5%85%83"><span class="post-toc-text">1.群中无零元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%80%86%E5%85%83%E5%94%AF%E4%B8%80"><span class="post-toc-text">2.逆元唯一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%94%AF%E4%B8%80"><span class="post-toc-text">3.线性表示唯一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B6%88%E5%8E%BB%E5%BE%8B"><span class="post-toc-text">4.消去律</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%AD%89%E5%B9%82%E5%85%83%E4%BB%85%E4%B8%BA%E5%B9%BA%E5%85%83"><span class="post-toc-text">5.等幂元仅为幺元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BF%90%E7%AE%97%E8%A1%A8%E7%94%B1%E8%BD%BD%E4%BD%93%E7%9A%84%E7%BD%AE%E6%8D%A2%E6%9E%84%E6%88%90"><span class="post-toc-text">6.运算表由载体的置换构成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B8%B8%E8%A7%81%E9%98%B6%E6%95%B0%E7%9A%84%E7%BE%A4"><span class="post-toc-text">7.常见阶数的群</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E9%83%A8%E5%88%86%E5%AE%9A%E7%90%86"><span class="post-toc-text">三、部分定理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%83%E7%B4%A0%E6%9C%89%E9%99%90%E9%98%B6%E7%9A%84%E5%91%A8%E6%9C%9F%E6%80%A7"><span class="post-toc-text">1.元素有限阶的周期性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%83%E7%B4%A0%E4%B8%8E%E5%85%B6%E9%80%86%E5%85%83%E9%98%B6%E6%95%B0%E7%9B%B8%E5%90%8C"><span class="post-toc-text">3.元素与其逆元阶数相同</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%89%E9%99%90%E7%BE%A4%E9%98%B6%E6%95%B0%E8%87%B3%E5%A4%9A%E4%B8%BA%E7%BE%A4%E7%9A%84%E9%98%B6%E6%95%B0"><span class="post-toc-text">4.有限群阶数至多为群的阶数</span></a></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>涉及到有限集合的证明，通常会选择<strong>鸽巢原理</strong>进行辅助，其一般形式是构造多个元素，确定至少两者相等，随后进一步推理</p>
+<span id="more"></span>
+<h2 id="一定义">一、定义</h2>
+<h3 id="群的定义">1.群的定义</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个代数系统，其中<span class="math inline">\(G\)</span>是非空集合，<span class="math inline">\(*\)</span>是<span class="math inline">\(G\)</span>上一个二元运算。如果满足</p>
+<ul>
+<li>运算*是可结合的</li>
+<li>存在幺元 <span class="math inline">\(e\)</span></li>
+<li>对于每一个元素<span class="math inline">\(x\in G\)</span>,都存在逆元<span class="math inline">\(x^{-1}\in G\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群。</p>
+<p><u>一句话总结，每个元素的存在逆元的独异点</u>。</p>
+<p><img src="https://s2.loli.net/2023/11/03/NH4eEAROfCuWPQb.png" style="zoom:80%;" /></p>
+<h3 id="有限群">2.有限群</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，如果<span class="math inline">\(G\)</span>是有限集，则称<span class="math inline">\(&lt;G,*&gt;\)</span>为有限群。</p>
+<h3 id="无限群">3.无限群</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，如果<span class="math inline">\(G\)</span>是无限集，则称<span class="math inline">\(&lt;G,*&gt;\)</span>为有限群。</p>
+<h3 id="群的阶数">4.群的阶数</h3>
+<p>有限群<span class="math inline">\(&lt;G,*&gt;\)</span>的载体<span class="math inline">\(G\)</span>的基数<span class="math inline">\(|G|\)</span>,称为群的阶。</p>
+<h3 id="群中元素的阶">5.群中元素的阶</h3>
+<p>对于群&lt;<span class="math inline">\(G,*&gt;\)</span>,由于<span class="math inline">\(*\)</span>运算是可结合的，定义<span class="math inline">\(a^0{=}e\)</span>,当<span class="math inline">\(n\)</span>为大于<span class="math inline">\(0\)</span>的正整数时，有<span class="math inline">\(a^n=a*a*...*a(共n个a)\)</span> 对于任意整数<span class="math inline">\(i,j\)</span>,有</p>
+<ul>
+<li><span class="math inline">\(a^i*a^j=a^{i+j};\)</span></li>
+<li><span class="math inline">\(\left(a^i\right)^j=a^{ij}\)</span></li>
+</ul>
+<p><strong>若存在一个使<span class="math inline">\(a^n=e\)</span>成立的最小正整数n，则称n为元素<span class="math inline">\(a\)</span>的阶(或周期); 否则，称元素<span class="math inline">\(a\)</span>的阶是无限的。</strong>也就是说<u>群中元素的阶是使该元素的幂为幺元的最小正整数</u>。</p>
+<h2 id="二性质">二、性质</h2>
+<h3 id="群中无零元">1.群中无零元</h3>
+<p>​ <u>当群中只有一个元素的时候，一般的把 它看作幺元，如果它是零元的话，它就不符合 群的定义了</u>。因为零元没有逆元，零元与任何 元素进行操作结果都是零元</p>
+<h3 id="逆元唯一">2.逆元唯一</h3>
+<p>群中每个元素的逆元都是唯一的。</p>
+<p>假设群中的元素<span class="math inline">\(a\)</span>有两个逆元<span class="math inline">\(c,d\)</span>, 则：<span class="math inline">\(c=c*e=c*(a*d)=(c*a)*d=e*d=d\)</span></p>
+<h3 id="线性表示唯一">3.线性表示唯一</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，对于<span class="math inline">\(a,b\in G\)</span>,必存在唯一的<span class="math inline">\(x\in G\)</span>, 使得<span class="math inline">\(a*x=b\)</span>，且<span class="math inline">\(x=a^{-1}*b\)</span>。</p>
+<p><img src="https://s2.loli.net/2023/11/03/aDCZPJcNkM2fnUK.png" style="zoom:80%;" /></p>
+<h3 id="消去律">4.消去律</h3>
+<p>设&lt;G,*&gt;是一个群，对于任意<span class="math inline">\(a,b,c\in G\)</span>,若有a *b=a*c或者b*a=c*a,则必有 <span class="math inline">\(b=c\)</span>(消去律)。</p>
+<p><img src="https://s2.loli.net/2023/11/04/3xHwisYDJemkQuS.png" style="zoom:80%;" /></p>
+<h3 id="等幂元仅为幺元">5.等幂元仅为幺元</h3>
+<p>设<span class="math inline">\(&lt;G,*&gt;\)</span>是一个群，除幺元<span class="math inline">\(e\)</span>外， 不可能有任何别的等幂元。</p>
+<p><img src="https://s2.loli.net/2023/11/04/YVOKjgrb7zG1v3S.png" style="zoom:80%;" /></p>
+<h3 id="运算表由载体的置换构成">6.运算表由载体的置换构成</h3>
+<p>群<span class="math inline">\(&lt;G,*&gt;\)</span>的运算表中的每一行或每一列都是<span class="math inline">\(G\)</span>中元素的一个置换。</p>
+<p><img src="https://s2.loli.net/2023/11/04/vFZuywC3K2IV7e5.png" style="zoom:80%;" /></p>
+<h3 id="常见阶数的群">7.常见阶数的群</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">一阶群一个</th>
+<th style="text-align: center;">二阶群一个</th>
+<th style="text-align: center;">三阶群一个</th>
+<th>四阶群有两个</th>
+<th>五阶群仅一个</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/04/X8cjgpwEYB3Moms.png" /></td>
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/04/QTLHOVxI7Fwlnby.png" /></td>
+<td style="text-align: center;"><img src="https://s2.loli.net/2023/11/04/VuiHIU67zkLCGdQ.png" style="zoom:80%;" /></td>
+<td><img src="https://s2.loli.net/2023/11/04/459d6E1PzWKNL8f.png" /></td>
+<td><img src="https://s2.loli.net/2023/11/04/WIinmbNQYBM73wE.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="三部分定理">三、部分定理</h2>
+<h3 id="元素有限阶的周期性">1.元素有限阶的周期性</h3>
+<p>如果群&lt;<span class="math inline">\(G,*&gt;\)</span>的元素<span class="math inline">\(a\)</span>拥有一个有限阶<span class="math inline">\(n\)</span>，则<span class="math inline">\(a^k=e\)</span>，当且仅当<span class="math inline">\(k\)</span>是<span class="math inline">\(n\)</span>的倍数。</p>
+<p><img src="https://s2.loli.net/2023/11/04/tQ6ENIeumXKnTCJ.png" style="zoom:80%;" /></p>
+<h3 id="元素与其逆元阶数相同">3.元素与其逆元阶数相同</h3>
+<p>群中任何一个元素与它的逆元具 有相同的阶。</p>
+<p><img src="https://s2.loli.net/2023/11/04/lBVX9SMgEY8RTA1.png" style="zoom:80%;" /></p>
+<h3 id="有限群阶数至多为群的阶数">4.有限群阶数至多为群的阶数</h3>
+<p>有限群<span class="math inline">\(&lt;G,*&gt;\)</span>中任何一个元素的阶数至多为<span class="math inline">\(|G|\)</span>。</p>
+<p><img src="https://s2.loli.net/2023/11/04/joqX2bpBWsgZwS4.png" style="zoom:80%;" /></p>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/11/04/%E4%BB%A3%E6%95%B0-(7)-%E7%89%B9%E6%AE%8A%E7%BE%A4%E5%8F%8A%E5%AD%90%E7%BE%A4/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>代数 (7) 特殊群及子群</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/03/%E4%BB%A3%E6%95%B0-(5)-%E5%8D%8A%E7%BE%A4%E5%92%8C%E7%8B%AC%E5%BC%82%E7%82%B9/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      代数 (5) 半群和独异点
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>
