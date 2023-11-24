@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        数据库-(4)-SQL基础2-数据查询 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">数据库-(4)-SQL基础2-数据查询</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2023-11-10</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A1%A8%E5%8D%95%E6%9F%A5%E8%AF%A2"><span class="post-toc-text">表单查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%99%AE%E9%80%9A%E6%9F%A5%E8%AF%A2"><span class="post-toc-text">普通查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9F%A5%E8%AF%A2%E8%AE%A1%E7%AE%97%E5%90%8E%E7%9A%84%E5%80%BC"><span class="post-toc-text">查询计算后的值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%BB%A1%E8%B6%B3%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%85%83%E7%BB%84"><span class="post-toc-text">查询满足条件的元组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%81%9A%E9%9B%86%E5%87%BD%E6%95%B0"><span class="post-toc-text">聚集函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#groupby-%E5%AD%90%E5%8F%A5"><span class="post-toc-text">GROUPBY 子句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#having-%E7%9F%AD%E8%AF%AD%E7%AD%9B%E9%80%89"><span class="post-toc-text">HAVING 短语筛选</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="post-toc-text">连接查询</span></a></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>数据查询是数据库的核心操作。SQL 提供了 SELECT 语句进行数据查询，该语句具有灵活的使用方式和丰富的功能。其一般格式为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> [<span class="hljs-keyword">ALL</span>]<span class="hljs-keyword">DISTINCT</span>] <span class="hljs-operator">&lt;</span>目标列表达式<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>目标列表达式<span class="hljs-operator">&gt;</span>] ... <br><span class="hljs-keyword">FROM</span><span class="hljs-operator">&lt;</span>表名或视图名<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>表名或视图名<span class="hljs-operator">&gt;</span>...]<span class="hljs-operator">|</span>(<span class="hljs-operator">&lt;</span><span class="hljs-keyword">SELECT</span> 语句<span class="hljs-operator">&gt;</span>)[<span class="hljs-keyword">AS</span>]<span class="hljs-operator">&lt;</span>别名<span class="hljs-operator">&gt;</span><br>[<span class="hljs-keyword">WHERE</span><span class="hljs-operator">&lt;</span>条件表达式<span class="hljs-operator">&gt;</span>]<br>[<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span><span class="hljs-operator">&lt;</span>列名 <span class="hljs-number">1</span><span class="hljs-operator">&gt;</span>[<span class="hljs-keyword">HAVING</span><span class="hljs-operator">&lt;</span>条件表达式<span class="hljs-operator">&gt;</span>]]<br>[<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span><span class="hljs-operator">&lt;</span>列名 <span class="hljs-number">2</span><span class="hljs-operator">&gt;</span>[<span class="hljs-keyword">ASC</span><span class="hljs-operator">|</span><span class="hljs-keyword">DESC</span>]];<br></code></pre></td></tr></table></figure>
+<ul>
+<li>整个 <code>SELECT</code> 语句的含义是，根据 <code>WHERE</code> 子句的条件表达式从 <code>FROM</code> 子句指定的基本表、视图或派生表中找出满足条件的元组，再按 <code>SELECT</code> 子句中的目标列表达式选出元组中的属性值形成结果表。</li>
+<li>如果有 <code>GROUP BY</code> 子句，则将结果按&lt;列名 1&gt;的值进行分组，该属性列值相等的元组为一个组。通常会在每组中作用聚集函数</li>
+<li>如果 <code>GROUP BY</code> 子句带 <code>HAVING</code>短语，则只有满足指定条件的组才予以输出。</li>
+<li>如果有 <code>ORDER BY</code> 子句，则结果表还要按&lt;列名 2&gt;的值的升序或降序排序。<code>SELECT</code> 语句既可以完成简单的单表查询，也可以完成复杂的连接查询和嵌套查询。</li>
+</ul>
+<span id="more"></span>
+<h2 id="表单查询">表单查询</h2>
+<blockquote>
+<p>表单查询时只涉及一个表的查询</p>
+</blockquote>
+<h3 id="普通查询">普通查询</h3>
+<ol type="1">
+<li>查询全体学生的学号与姓名。</li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Sname <span class="hljs-comment">/*这里列出来的列名就是查询出来的顺序*/</span><br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure></p>
+<ol start="2" type="1">
+<li><p>查询全体学生的姓名、学号、所在系。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Sno,Sdept <span class="hljs-comment">/*与题目顺序保持一致即可*/</span><br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure></li>
+<li><p>查询全体学生的详细记录</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Student;<br><span class="hljs-keyword">SELECT</span> Sno,Sname,Ssex,Sage,Sdept <span class="hljs-keyword">FROM</span> Student;<span class="hljs-comment">/*两条语句时等价的*/</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="查询计算后的值">查询计算后的值</h3>
+<ol type="1">
+<li>查询经过计算后的值</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,<span class="hljs-number">2014</span><span class="hljs-operator">-</span>Sage <span class="hljs-keyword">from</span> Student;<br></code></pre></td></tr></table></figure>
+<p>图片中的<code>?column?</code>需要自己改名字</p>
+<p><img src="https://s2.loli.net/2023/11/10/vGXd69wVAhxQ4In.png" style="zoom:80%;" /></p>
+<ol start="2" type="1">
+<li>查询全体学生的姓名、出生年份和所在的院系，要求用小写字母表示系名。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <br>  Sname, <br>  <span class="hljs-string">&#x27;Year of Birth:&#x27;</span> <span class="hljs-keyword">AS</span> &quot;Year of Birth&quot;, <span class="hljs-comment">/*带空格的列名需要使用双引号*/</span><br>  <span class="hljs-number">2014</span> <span class="hljs-operator">-</span> Sage <span class="hljs-keyword">AS</span> birthday, <br>  <span class="hljs-built_in">LOWER</span>(Sdept) <span class="hljs-keyword">AS</span> department <br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/11/10/dxrZHEGLT5hzeVA.png" style="zoom:80%;" /></p>
+<ol start="3" type="1">
+<li>查询选修了课程的学生学号。(一个学生可能选择多门课程，需要去重)</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">SELECT DIST CTSno <br>FROM SC; <br></code></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/11/10/GBDpzcubEYUnV3t.png" style="zoom:67%;" /></p>
+<h3 id="查询满足条件的元组">查询满足条件的元组</h3>
+<ol type="1">
+<li><p>查询计算机科学系全体学生的名单。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> sname <span class="hljs-keyword">from</span> student<br><span class="hljs-keyword">where</span> sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CS&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/11/10/uBEOQm8HGChKjIF.png" style="zoom:80%;" /></p></li>
+<li><p>查询所有年龄在 20 岁以下的学生姓名及其年龄。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> sname sage <span class="hljs-keyword">from</span> student<br><span class="hljs-keyword">where</span> sage <span class="hljs-operator">&lt;</span> <span class="hljs-number">20</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>查询年龄在 20~23 岁（包括 20 岁和 23 岁）之间的学生的姓名、系别和年龄。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Sdept,Sage <br><span class="hljs-keyword">FROM</span> Student <br><span class="hljs-keyword">WHERE</span> Sage <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">20</span> <span class="hljs-keyword">AND</span> <span class="hljs-number">23</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>查询计算机科学系 (CS) 、数学系 (MA) 和信息系 CIS) 学生的姓名和性别。</p></li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Ssex <br><span class="hljs-keyword">FROM</span> Student <br><span class="hljs-keyword">WHERE</span> Sdept <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;CS&#x27;</span>,<span class="hljs-string">&#x27;MA&#x27;</span>,<span class="hljs-string">&#x27;IS&#x27;</span>);<br></code></pre></td></tr></table></figure></p>
+<ol start="5" type="1">
+<li><p>查询既不是计算机科学系、数学系，也不是信息系的学生的姓名和性别。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Ssex <br><span class="hljs-keyword">FROM</span> Student <br><span class="hljs-keyword">WHERE</span> Sdept NOT.IN(<span class="hljs-string">&#x27;CS&#x27;</span>,<span class="hljs-string">&#x27;MA&#x27;</span>,<span class="hljs-string">&#x27;IS&#x27;</span>); <br></code></pre></td></tr></table></figure></li>
+<li><p>查询所有姓刘的学生的姓名、学号和性别。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Sno,Ssex <br><span class="hljs-keyword">FROM</span> Student <br><span class="hljs-keyword">WHERE</span> Sname <span class="hljs-keyword">LIKE</span><span class="hljs-string">&#x27;刘％＇；</span><br></code></pre></td></tr></table></figure></li>
+<li><p>查询姓“欧阳”且全名为三个汉字的学生的姓名。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">SELECT Sname <br>FROM Student <br>WHERE Sname LIKE &#x27;欧阳＿＇；<br></code></pre></td></tr></table></figure></li>
+<li><p>查询 DB_Design 课程的课程号和学分。(转义字符)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Cno,Ccredit <br><span class="hljs-keyword">FROM</span> Course <br><span class="hljs-keyword">WHERE</span> Cname <span class="hljs-keyword">LIKE</span><span class="hljs-string">&#x27;DB \_Design&#x27;</span><span class="hljs-keyword">ESCAPE</span><span class="hljs-string">&#x27;\&#x27;</span>; <br></code></pre></td></tr></table></figure></li>
+<li><p>查询以 “DB_&quot; 开头，且倒数第三个字符为 的课程的详细情况。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><span class="hljs-operator">*</span> <br><span class="hljs-keyword">FROM</span> Course <br><span class="hljs-keyword">WHERE</span> Cname <span class="hljs-keyword">LIKE</span><span class="hljs-string">&#x27;DB \_%i __&#x27;</span><span class="hljs-keyword">ESCAPE</span><span class="hljs-string">&#x27;\&#x27;</span>; <br></code></pre></td></tr></table></figure></li>
+<li><p>查询选修了 号课程的学生的学号及其成绩，查询结果按分数的降序排列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> Sno,Grade <br><span class="hljs-keyword">FROM</span> SC <br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;3&#x27;</span> <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> Grade <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>查询全体学生情况，查询结果按所在系的系号升序排列，同一系中的学生 按年龄降序排列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span><span class="hljs-operator">*</span> <br><span class="hljs-keyword">FROM</span> Student <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> Sdept,Sage <span class="hljs-keyword">DESC</span>; <br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="聚集函数">聚集函数</h3>
+<ol type="1">
+<li><p>查询学生总人数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <br><span class="hljs-keyword">FROM</span> Student; <br></code></pre></td></tr></table></figure></li>
+<li><p>查询选修了课程的学生人数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> Sno) <br><span class="hljs-keyword">FROM</span> SC;<br></code></pre></td></tr></table></figure></li>
+<li><p>计算选修 号课程的学生平均成绩。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(Grade) <br><span class="hljs-keyword">FROM</span> SC <br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>查询选修 号课程的学生最高分数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(Gtade) <br><span class="hljs-keyword">FROM</span> SC <br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;I&#x27;</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>查询学生 201215012 选修课程的总学分数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> SOM(Ccredit) <br><span class="hljs-keyword">FROM</span> SC, Course <br><span class="hljs-keyword">WHERE</span> Sno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;201215012&#x27;</span><span class="hljs-keyword">AND</span> SC.Cno<span class="hljs-operator">=</span>Course.Cno;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="groupby-子句">GROUPBY 子句</h3>
+<ol type="1">
+<li><p>求各个课程号及相应的选课人数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> Cno,<span class="hljs-built_in">COUNT</span>(Sno) <br><span class="hljs-keyword">FROM</span> SC <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Cno; <br></code></pre></td></tr></table></figure></li>
+<li><p>查询选修了三门以上课程的学生学号。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL">SELECTSno <br><span class="hljs-keyword">FROM</span> SC <br>GROUPBYSno <br><span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;</span><span class="hljs-number">3</span>; <br></code></pre></td></tr></table></figure>
+<h3 id="having-短语筛选">HAVING 短语筛选</h3>
+<p><code>WHERE</code> 子句与 <code>HAVING</code> 短语的区别在作用对象不同。<code>WHERE</code> 子句作用千基本表或 视图，从中选择满足条件的元组。 HAVING 短语作用于组，从中选择满足条件的组。</p>
+<ol type="1">
+<li>查询平均成绩大于等于90 分的学生学号和平均成绩。</li>
+</ol></li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--错误示范</span><br><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade) <br><span class="hljs-keyword">FROM</span> SC <br><span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">AVG</span>(Gtade)<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span> <br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno; <br><br><span class="hljs-comment">--正确</span><br><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade) <br><span class="hljs-keyword">FROM</span> SC <br>GROUPBYSno <br><span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-operator">&gt;</span><span class="hljs-comment">---9(); </span><br></code></pre></td></tr></table></figure>
+<h2 id="连接查询">连接查询</h2>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/11/16/%E4%BB%A3%E6%95%B0-(8)-%E7%BE%A4%E5%90%8C%E6%80%81/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>代数 (8) 群同态</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/10/%E5%AD%A6%E7%94%9F%E3%80%81%E8%AF%BE%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E7%AB%8B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%8F%92%E5%85%A5%E5%85%B6%E4%B8%AD%E6%95%B0%E6%8D%AE/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      未命名
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

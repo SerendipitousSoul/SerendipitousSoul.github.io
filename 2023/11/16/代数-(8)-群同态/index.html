@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        代数 (8) 群同态 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">代数 (8) 群同态</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E7%BE%A4%E5%90%8C%E6%80%81/" class="post-tag">#群同态</a><a href="/tags/%E5%90%8C%E6%80%81%E6%A0%B8/" class="post-tag">#同态核</a>
+
+
+          <span class="post-date">2023-11-16</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E5%AE%9A%E4%B9%89"><span class="post-toc-text">一、定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BE%A4%E5%90%8C%E6%80%81"><span class="post-toc-text">群同态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%90%8C%E6%80%81%E6%A0%B8"><span class="post-toc-text">同态核</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E6%80%A7%E8%B4%A8"><span class="post-toc-text">二、性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%861"><span class="post-toc-text">定理1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%862"><span class="post-toc-text">定理2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%863"><span class="post-toc-text">定理3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E7%90%864"><span class="post-toc-text">定理4</span></a></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <span id="more"></span>
+<p>同态的范围被扩充到了群</p>
+<h2 id="一定义">一、定义</h2>
+<h3 id="群同态">群同态</h3>
+<p>​ 设<span class="math inline">\(&lt;G,*&gt;\)</span>和<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>是两个群，<span class="math inline">\(h:G→H\)</span>，若对于任意<span class="math inline">\(a,b∈G\)</span>，都有<span class="math inline">\(h(a*b)=h(a)*&#39;h(b)\)</span>，则称<span class="math inline">\(h\)</span>为从<span class="math inline">\(&lt;G,*&gt;\)</span>到<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>的群同态，<span class="math inline">\(&lt;h(G),*’&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的同态象</p>
+<h3 id="同态核">同态核</h3>
+<p>​ 设<span class="math inline">\(h\)</span>是从群<span class="math inline">\(&lt;G,*&gt;\)</span>到<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>的同态映射，<span class="math inline">\(e_H\)</span>是<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>中的幺元，<span class="math inline">\(Ker(h)=\{x|x∈G且h(x)=e_H\}\)</span>，称<span class="math inline">\(ker(H)\)</span>为群同态映射<span class="math inline">\(h\)</span>的核，简称<span class="math inline">\(h\)</span>的同态核。</p>
+<p><img src="https://s2.loli.net/2023/11/16/FsZyj3DxldL9WcU.png" style="zoom:80%;" /></p>
+<h2 id="二性质">二、性质</h2>
+<h3 id="定理1">定理1</h3>
+<p>设<span class="math inline">\(h\)</span>为从<span class="math inline">\(&lt;G,*&gt;\)</span>到<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>的一个同态映射，<span class="math inline">\(&lt;G,*&gt;\)</span>在<span class="math inline">\(h\)</span>下的同态象<span class="math inline">\(&lt;h(G),*&#39;&gt;\)</span>也是群。</p>
+<p><img src="https://s2.loli.net/2023/11/16/kIAdERSTqfh2zsw.png" style="zoom: 80%;" /></p>
+<h3 id="定理2">定理2</h3>
+<p>设<span class="math inline">\(h\)</span>为从<span class="math inline">\(&lt;G,*&gt;\)</span>到<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>的一个同态映射，<span class="math inline">\(&lt;G,*&gt;\)</span>的在<span class="math inline">\(h\)</span>下同态象<span class="math inline">\(&lt;h(G),*&#39;&gt;\)</span>是<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>的子群。</p>
+<p>显然<span class="math inline">\(h(e)\)</span>是<span class="math inline">\(&lt;h(G),*&#39;&gt;\)</span>的幺元，同时根据同态映射常元部分的定义，显然<span class="math inline">\(h(e)\)</span>也是<span class="math inline">\(&lt;h,*&#39;&gt;\)</span>中的幺元。</p>
+<h3 id="定理3">定理3</h3>
+<p>设<span class="math inline">\(h\)</span>为从<span class="math inline">\(&lt;G,*&gt;\)</span>到<span class="math inline">\(&lt;H,*&#39;&gt;\)</span>的一个同态映射，<span class="math inline">\(ker(H)\)</span>是<span class="math inline">\(h\)</span>的同态核，则<span class="math inline">\(&lt;ker(H),*&gt;\)</span>是<span class="math inline">\(&lt;G,*&gt;\)</span>的子群。</p>
+<p><img src="https://s2.loli.net/2023/11/16/dsXhoaW1eSKVBzI.png" style="zoom:80%;" /></p>
+<h3 id="定理4">定理4</h3>
+<p>设&lt;<span class="math inline">\(G,*&gt;\)</span>是由<span class="math inline">\(g\in G\)</span>为生成元的循环群。</p>
+<ul>
+<li>若<span class="math inline">\(G\)</span>是无限集，则<span class="math inline">\(&lt;G,*&gt;\)</span>与&lt;<span class="math inline">\(I,+&gt;\)</span>同构。</li>
+<li>若<span class="math inline">\(G\)</span>是有限集且<span class="math inline">\(|G|{=}k\)</span>,则<span class="math inline">\(&lt;G,*&gt;\)</span>与<span class="math inline">\(&lt;N_k,+_k&gt;\)</span>同构。</li>
+</ul>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/11/22/%E4%BB%A3%E6%95%B0-(9)-%E9%99%AA%E9%9B%86%E4%B8%8E%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>代数 (9) 陪集与拉格朗日定理</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/10/%E6%95%B0%E6%8D%AE%E5%BA%93-(4)-SQL%E5%9F%BA%E7%A1%802-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      数据库-(4)-SQL基础2-数据查询
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

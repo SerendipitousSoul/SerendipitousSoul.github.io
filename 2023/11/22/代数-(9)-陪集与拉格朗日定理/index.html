@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+        代数 (9) 陪集与拉格朗日定理 | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner--toc">
+      <div class="post-content__head">
+        <div class="post-title">代数 (9) 陪集与拉格朗日定理</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E9%99%AA%E9%9B%86/" class="post-tag">#陪集</a><a href="/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86/" class="post-tag">#拉格朗日定理</a>
+
+
+          <span class="post-date">2023-11-22</span>
+        </div>
+      </div>
+      
+        <aside class="toc-outer">
+          <div class="toc-title">目录</div>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E5%AE%9A%E4%B9%89"><span class="post-toc-text">一、定义</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%99%AA%E9%9B%86"><span class="post-toc-text">陪集</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E7%9B%B8%E5%85%B3%E6%80%A7%E8%B4%A8"><span class="post-toc-text">二、相关性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%94%B1%E7%9B%B8%E5%90%8C%E5%AD%90%E7%BE%A4%E5%BC%95%E5%87%BA%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%99%AA%E9%9B%86%E8%A6%81%E4%B9%88%E5%AE%8C%E5%85%A8%E7%9B%B8%E5%90%8C%E8%A6%81%E4%B9%88%E6%AF%AB%E6%97%A0%E5%85%B3%E7%B3%BB"><span class="post-toc-text">1.由相同子群引出的两个陪集要么完全相同要么毫无关系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%94%B1%E7%9B%B8%E5%90%8C%E5%AD%90%E7%BE%A4%E5%BC%95%E5%87%BA%E7%9A%84%E9%99%AA%E9%9B%86%E9%98%B6%E6%95%B0%E7%9B%B8%E5%90%8C"><span class="post-toc-text">2.由相同子群引出的陪集阶数相同</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86"><span class="post-toc-text">三、拉格朗日定理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86%E6%8E%A8%E8%AE%BA"><span class="post-toc-text">四、拉格朗日定理推论</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%BB%E4%BD%95%E8%B4%A8%E6%95%B0%E9%98%B6%E7%9A%84%E7%BE%A4%E6%B2%A1%E6%9C%89%E9%9D%9E%E5%B9%B3%E5%87%A1%E5%AD%90%E7%BE%A4"><span class="post-toc-text">1.任何质数阶的群没有非平凡子群</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%89%E9%99%90%E7%BE%A4%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6%E6%98%AF%E7%BE%A4%E7%9A%84%E9%98%B6%E6%95%B0%E7%9A%84%E5%9B%A0%E5%AD%90"><span class="post-toc-text">2.有限群中元素的阶是群的阶数的因子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E8%B4%A8%E6%95%B0%E9%98%B6%E7%9A%84%E7%BE%A4%E5%BF%85%E6%98%AF%E5%BE%AA%E7%8E%AF%E7%BE%A4%E5%B9%B6%E4%B8%94%E4%BB%BB%E4%BD%95%E4%B8%8E%E5%B9%BA%E5%85%83%E4%B8%8D%E5%90%8C%E7%9A%84%E5%85%83%E7%B4%A0%E5%9D%87%E5%8F%AF%E4%BD%9C%E4%B8%BA%E7%94%9F%E6%88%90%E5%85%83"><span class="post-toc-text">3.一个质数阶的群必是循环群，并且任何与幺元不同的元素均可作为生成元</span></a></li></ol></li></ol>
+          <a href="#" class="toc-top">回到顶部</a>
+        </aside>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <span id="more"></span>
+<h2 id="一定义">一、定义</h2>
+<h3 id="陪集">陪集</h3>
+<p>设 <span class="math inline">\(&lt;H,*&gt;\)</span>是群<span class="math inline">\(&lt;G,*&gt;\)</span>的一个子群， <span class="math inline">\(a\in G\)</span>,则集合<span class="math inline">\(aH=\{a*b|b\in H\}\)</span>,称为由<span class="math inline">\(a\)</span>确定的<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中的左陪集。元素<span class="math inline">\(a\in aH\)</span>称为左陪集<span class="math inline">\(aH\)</span>的代表元素。 同理，<span class="math inline">\(Ha=\{b*a|b\in H\}\)</span>称为由a确定的<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中的右陪集。</p>
+<h2 id="二相关性质">二、相关性质</h2>
+<h3 id="由相同子群引出的两个陪集要么完全相同要么毫无关系">1.由相同子群引出的两个陪集要么完全相同要么毫无关系</h3>
+<p>设<span class="math inline">\(&lt;H,*&gt;\)</span>是群<span class="math inline">\(&lt;G,*&gt;\)</span>的一个子群， <span class="math inline">\(aH\)</span>和<span class="math inline">\(bH\)</span>是任意两个左陪集，那么<span class="math inline">\(aH=bH\)</span>或<span class="math inline">\(aH\cap bH=\boldsymbol{\phi}\:\)</span>.</p>
+<p><img src="https://s2.loli.net/2023/11/22/TFgGnArxwOvSicz.png" style="zoom:80%;" /></p>
+<h3 id="由相同子群引出的陪集阶数相同">2.由相同子群引出的陪集阶数相同</h3>
+<p>设<span class="math inline">\(&lt;H,*&gt;\)</span>是群<span class="math inline">\(&lt;G,*&gt;\)</span>的一个子群， <span class="math inline">\(aH\)</span>和<span class="math inline">\(bH\)</span>是任意两个左陪集，那么<span class="math inline">\(|aH|=|bH|=|H|\)</span>。</p>
+<p><img src="https://s2.loli.net/2023/11/22/xZ6duUDazN2EQFX.png" style="zoom:80%;" /></p>
+<h2 id="三拉格朗日定理">三、拉格朗日定理</h2>
+<p>同一个陪集上任意元素是等价的，即一个陪集上取两个元素组成的关系是等价关系。</p>
+<p>设<span class="math inline">\(&lt;H,*&gt;\)</span>是群<span class="math inline">\(&lt;G,*&gt;\)</span>的一个子群,那么有 (1)<span class="math inline">\(R=\{&lt;a,b&gt;\mid a\in G\land b\in G\land a^{-1}*b\in H\}\)</span>是<span class="math inline">\(G\)</span>中的等价关系，且有<span class="math inline">\([a]_R{=}aH\)</span>。 (2)若<span class="math inline">\(G\)</span>是有限群，<span class="math inline">\(|G|=n,|H|=m\)</span>, 则<span class="math inline">\(m\mid n\)</span>。</p>
+<p><img src="https://s2.loli.net/2023/11/23/y8bLQ5RGSCpUTfw.png" style="zoom:80%;" /></p>
+<h2 id="四拉格朗日定理推论">四、拉格朗日定理推论</h2>
+<h3 id="任何质数阶的群没有非平凡子群">1.任何质数阶的群没有非平凡子群</h3>
+<h3 id="有限群中元素的阶是群的阶数的因子">2.有限群中元素的阶是群的阶数的因子</h3>
+<p><img src="https://s2.loli.net/2023/11/23/HQmqJBGTYWpjctb.png" style="zoom:80%;" /></p>
+<h3 id="一个质数阶的群必是循环群并且任何与幺元不同的元素均可作为生成元">3.一个质数阶的群必是循环群，并且任何与幺元不同的元素均可作为生成元</h3>
+<p>很显然由推论2里面的构建子群方法证明。</p>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <div class="post-nav-item-left"></div>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/11/16/%E4%BB%A3%E6%95%B0-(8)-%E7%BE%A4%E5%90%8C%E6%80%81/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      代数 (8) 群同态
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>

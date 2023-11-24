@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <title>
       
-        数据库-(4)-SQL基础1 | 小破绽
+        数据库-(4)-SQL基础1-数据定义 | 小破绽
       
     </title>
     <meta name="description" content=""/>
@@ -89,10 +89,10 @@
   <article class="post-content">
     <div class="post-inner--toc">
       <div class="post-content__head">
-        <div class="post-title">数据库-(4)-SQL基础1</div>
+        <div class="post-title">数据库-(4)-SQL基础1-数据定义</div>
         <div class="post-info">
           
-  
+  <a href="/tags/SQL/" class="post-tag">#SQL</a><a href="/tags/%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E5%88%A0%E9%99%A4/" class="post-tag">#模式的定义、删除</a><a href="/tags/%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E4%BF%AE%E6%94%B9%E3%80%81%E5%88%A0%E9%99%A4/" class="post-tag">#表的定义、修改、删除</a><a href="/tags/%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E5%88%A0%E9%99%A4/" class="post-tag">#索引的建立与删除</a>
 
 
           <span class="post-date">2023-11-07</span>
@@ -101,7 +101,7 @@
       
         <aside class="toc-outer">
           <div class="toc-title">目录</div>
-          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="post-toc-text">基础概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AD%A6%E7%94%9F%E8%AF%BE%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">学生－课程数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sql%E5%AE%9A%E4%B9%89%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">SQL定义语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="post-toc-text">模式的定义与删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">模式的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">删除模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="post-toc-text">基本表的定义、删除与修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%A1%A8"><span class="post-toc-text">模式与表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4"><span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9"><span class="post-toc-text">修改</span></a></li></ol></li></ol>
+          <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="post-toc-text">基础概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AD%A6%E7%94%9F%E8%AF%BE%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-text">学生－课程数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sql%E5%AE%9A%E4%B9%89%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">SQL定义语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="post-toc-text">模式的定义与删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">模式的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">删除模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="post-toc-text">基本表的定义、删除与修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E8%A1%A8"><span class="post-toc-text">定义基本表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%A1%A8"><span class="post-toc-text">模式与表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E5%9F%BA%E6%9C%AC%E8%A1%A8"><span class="post-toc-text">修改基本表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E5%9F%BA%E6%9C%AC%E8%A1%A8"><span class="post-toc-text">删除基本表</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="post-toc-text">索引的建立与删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E5%BB%BA%E7%AB%8B"><span class="post-toc-text">索引建立</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BF%AE%E6%94%B9"><span class="post-toc-text">索引修改</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="post-toc-text">删除索引</span></a></li></ol></li></ol>
           <a href="#" class="toc-top">回到顶部</a>
         </aside>
       
@@ -179,7 +179,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">DROP ZHANG RESTRICT;/*级联模式下删除，所有相关联的定义都将删除*/<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="基本表的定义删除与修改">基本表的定义、删除与修改</h2>
-<h3 id="定义">定义</h3>
+<h3 id="定义基本表">定义基本表</h3>
 <ol type="1">
 <li><p>建立一个学生表Student</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student(<br>    Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>)<span class="hljs-keyword">PRIMARY</span> KEY, <span class="hljs-comment">/*列级完整性约束条件，这里是表示主码*/</span><br>    Sname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>)<span class="hljs-keyword">UNIQUE</span>, <span class="hljs-comment">/*取唯一值*/</span><br>    Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br>    Sage <span class="hljs-type">SMALLINT</span>,<br>    Sdept <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>)<br>);<br></code></pre></td></tr></table></figure></li>
@@ -269,10 +269,47 @@
 </table>
 <h3 id="模式与表">模式与表</h3>
 <ul>
-<li>显示</li>
+<li>显示表示：<code>CREATE TABLE &quot;S-T&quot;.Student(…);</code></li>
+<li>在创建模式的时候直接创建表。</li>
+<li>设置所属的模式，然后就不必特意指定表的所属。</li>
 </ul>
-<h3 id="删除">删除</h3>
-<h3 id="修改">修改</h3>
+<h3 id="修改基本表">修改基本表</h3>
+<p><code>ALTER COLUMN</code> 子句<strong><u>用于修改原有的列定义，包括修改列名和数 据类型</u></strong></p>
+<p><img src="https://s2.loli.net/2023/11/09/CIbdXNi8zeOyg4D.png" style="zoom:80%;" /></p>
+<ol type="1">
+<li><p>向 Student 表增加“入学时间”列，其数据类型为日期型。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">ADD</span> S_entrance <span class="hljs-type">DATE</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>将年龄的数据类型由字符型（假设原来的数据类型是字符型）改为整数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">COLUMN</span> <span class="hljs-type">DATE</span>;<br></code></pre></td></tr></table></figure></li>
+<li><p>增加课程名称必须取唯一值的约束条件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Course <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span>(Cname);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="删除基本表">删除基本表</h3>
+<p>当某个基本表不再需要时，可以使用 <code>DROP TABLE</code> 语句删除它。其一般格式为：<code>DROPTABLE ＜表名＞ [ RESTRICT I CASCM&gt;E] ;</code></p>
+<ol type="1">
+<li><p>删除 Student 表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> Student CASCADE;<br></code></pre></td></tr></table></figure>
+<p><u>基本表定义一旦被删除，不仅表中的数据和此表的定义将被删除，而且此表上建立的 索引、触发器等对象一般也都将被删除</u>。有的关系数据库管理系统还会同时删除在此表上 建立的视图。</p></li>
+</ol>
+<h2 id="索引的建立与删除">索引的建立与删除</h2>
+<p>在 <code>SQL</code> 语言中，建立索引使用<code>CREATE INDEX</code> 语句，其一般格式为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> [<span class="hljs-keyword">UNIQUE</span>] [CLUSTER] INDEX ＜索引名＞<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span>(＜列名＞ ［＜次序＞］ ［，＜列名＞ ［＜次序＞］］···);<br></code></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/11/09/fSo9qZpTzMV2HQJ.png" style="zoom:80%;" /></p>
+<h3 id="索引建立">索引建立</h3>
+<ol type="1">
+<li><p>为学生－课程数据库中的 <code>Student、 Course、 SC</code> 三个表建立索引。其中 <code>Student</code>表按学号升序建唯一索引， <code>Course</code> 表按课程号升序建唯一索引，<code>SC</code> 表按学号升序 和课程号降序建唯一索引。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX Stusno <span class="hljs-keyword">ON</span> Student(Sno); <br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX Coucno <span class="hljs-keyword">ON</span> Course(Cno); <br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX SCno <span class="hljs-keyword">ON</span> SC(Sno <span class="hljs-keyword">ASC</span>,Cno <span class="hljs-keyword">DESC</span>); <span class="hljs-comment">/*ASC表示升序，DESC表示降序，一般升序都可以默认不写*/</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="索引修改">索引修改</h3>
+<ol type="1">
+<li><p>将SC 表的 <code>SCno</code>索引名改为<code>SCSno</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">ALTER</span> INDEX SCno RENAME <span class="hljs-keyword">TO</span> SCSno;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="删除索引">删除索引</h3>
+<ol type="1">
+<li><p>删除 <code>Student</code> 表的<code>Stusname</code> 索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">DROP INDEX Stusname;<br></code></pre></td></tr></table></figure></li>
+</ol>
 
       </div>
     </div>
@@ -281,7 +318,19 @@
     
     <div class="post-nav">
   
-    <div class="post-nav-item-left"></div>
+    <a class="post-nav-item-left" href="/2023/11/10/%E5%AD%A6%E7%94%9F%E3%80%81%E8%AF%BE%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E7%AB%8B%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%8F%92%E5%85%A5%E5%85%B6%E4%B8%AD%E6%95%B0%E6%8D%AE/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>未命名</div>
+    </a>
   
   <div class="vhr"></div>
   
