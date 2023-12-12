@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+    <title>
+      
+         | 小破绽
+      
+    </title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"/>
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"/>
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color=""/>
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css'/>
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg"/>
+        </a>
+        <input id="navBtn" type="checkbox"/>
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/CS">CS基础</a>
+            
+              <a class="nav-menu-item" href="/Math">数理逻辑</a>
+            
+              <a class="nav-menu-item" href="/Code">编程技术</a>
+            
+          
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">未命名</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2023-12-12</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h2 id="第3章-8086汇编">第3章 8086汇编</h2>
+<h3 id="常用指令">常用指令</h3>
+<ul>
+<li><p>数据传送</p>
+<ul>
+<li><p>mov destination,source : 两个操作数不能同时为内存、目的操作数不能是 CS，IP、立即数不能送至段寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mov r/m16,sreg<br>mov sreg,r/m16<br></code></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>逻辑运算</p>
+<ul>
+<li><p>AND 目的,源：按位与，某一位或某些位置 0</p></li>
+<li><p>OR：置 1</p></li>
+<li><p>NOT reg/mem 操作数所有数据位取反</p></li>
+<li><p>XOR</p>
+<ul>
+<li><p>对某些位取反，同时不影响其他位（哪些为置1，就对哪些为取反）两次异或之后还是原来的数</p></li>
+<li><p>判断 16 位值的奇偶性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mov ax,64C1h	; 0110 0100 1100 0001<br>xor ah,al		; PE,奇偶标志被设置<br></code></pre></td></tr></table></figure></li>
+<li><p>简单数据加密：将某个操作数与同样的操作数执行两次异或运算后，其值保持不变。</p></li>
+</ul></li>
+</ul></li>
+<li><p>移位</p>
+<ul>
+<li><strong>SHL : 逻辑左移：低位补0，最高位移动到 CF</strong></li>
+<li><strong>SHR：逻辑右移 ：高位补 0，最低位移动到 CF</strong></li>
+<li><strong>ROL：循环左移：最高位同时移动到 CF 和最低位</strong></li>
+<li><strong>ROR：循环右移：最低位同时移动到 CF 和最低位</strong></li>
+<li>SAL：算术左移：低位补0，最高位移动到 CF</li>
+<li>SAR：算术右移：最高位不变</li>
+</ul></li>
+<li><p>算术运算</p>
+<ul>
+<li><p><strong>DAA：将 ADD 或 ADC 指令执行后 AL 的结果转换成压缩的 BCD 格式</strong></p></li>
+<li><p><strong>DAS：将 SUB 或 SBB 指令执行后 AL 的结果转换成压缩的 BCD 格式</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,35h<br>add al,48h	; AL = 7Dh<br>daa		; AL = 83h<br><br>mov bl,48h<br>mov al,85h<br>sub al,bl	; AL = 3Dh<br>das		; AL = 37h<br></code></pre></td></tr></table></figure></li>
+<li><p>==MUL==</p>
+<p>MUL r/m8 MUL r/m16，给出一个操作数，另一个操作数隐含寻址</p>
+<table>
+<thead>
+<tr class="header">
+<th>被乘数</th>
+<th>乘数</th>
+<th>积</th>
+<th>CF＝1的条件</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AL</td>
+<td>r/m8</td>
+<td>AX</td>
+<td>AH≠0</td>
+</tr>
+<tr class="even">
+<td>AX</td>
+<td>r/m16</td>
+<td>DX:AX</td>
+<td>DX≠0</td>
+</tr>
+<tr class="odd">
+<td>EAX</td>
+<td>r/m32</td>
+<td>EDX:EAX</td>
+<td>EDX≠0</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>==DIV==</p>
+<table>
+<thead>
+<tr class="header">
+<th>被除数</th>
+<th>除数</th>
+<th>商</th>
+<th>余数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AX</td>
+<td>r/m8</td>
+<td>AL</td>
+<td>AH</td>
+</tr>
+<tr class="even">
+<td>DX:AX</td>
+<td>r/m16</td>
+<td>AX</td>
+<td>DX</td>
+</tr>
+<tr class="odd">
+<td>EDX:EAX</td>
+<td>r/m32</td>
+<td>EAX</td>
+<td>EDX</td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+<li><p>堆栈</p>
+<ul>
+<li>PUSH、POP</li>
+</ul></li>
+<li><p>程序控制</p>
+<ul>
+<li><p>CALL、RET</p></li>
+<li><p>INT</p></li>
+<li><p>LOOP</p></li>
+<li><p>TEST</p></li>
+<li><p>CMP</p></li>
+<li><p>Jcond Z 零、C 进位、O溢出、S符号、P奇偶</p>
+<table>
+<thead>
+<tr class="header">
+<th>助记符</th>
+<th>描 述</th>
+<th>标志值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JZ</td>
+<td>为零则跳转</td>
+<td>ZF＝1</td>
+</tr>
+<tr class="even">
+<td>JNZ</td>
+<td>不为零则跳转</td>
+<td>ZF＝0</td>
+</tr>
+<tr class="odd">
+<td>JC</td>
+<td>如果设置进位标志则跳转</td>
+<td>CF＝1</td>
+</tr>
+<tr class="even">
+<td>JNC</td>
+<td>如果未设置进位标志则跳转</td>
+<td>CF＝0</td>
+</tr>
+<tr class="odd">
+<td>JO</td>
+<td>如果设置溢出标志则跳转</td>
+<td>OF＝1</td>
+</tr>
+<tr class="even">
+<td>JNO</td>
+<td>如果未设置溢出标志则跳转</td>
+<td>OF＝0</td>
+</tr>
+<tr class="odd">
+<td>JS</td>
+<td>如果设置符号标志则跳转</td>
+<td>SF＝1</td>
+</tr>
+<tr class="even">
+<td>JNS</td>
+<td>如果未设置符号标志则跳转</td>
+<td>SF＝0</td>
+</tr>
+<tr class="odd">
+<td>JP</td>
+<td>如果设置了奇偶标志则跳转（偶）</td>
+<td>PF＝1</td>
+</tr>
+<tr class="even">
+<td>JNP</td>
+<td>如果未设置奇偶标志则跳转（奇）</td>
+<td>PF＝0</td>
+</tr>
+</tbody>
+</table>
+<p>无符号整数比较结果：大于A 、小于 B</p>
+<table>
+<thead>
+<tr class="header">
+<th>助记符</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JA</td>
+<td>大于则跳转（leftOp＞rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNBE</td>
+<td>不小于或等于则跳转（同JA指令）</td>
+</tr>
+<tr class="odd">
+<td>JAE</td>
+<td>大于或等于则跳转（leftOp≥rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNB</td>
+<td>不小于则跳转（同JAE指令）</td>
+</tr>
+<tr class="odd">
+<td>JB</td>
+<td>小于则跳转（leftOp＜rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNAE</td>
+<td>不大于或等于则跳转（同JB指令）</td>
+</tr>
+<tr class="odd">
+<td>JBE</td>
+<td>小于或等于则跳转（leftOp≤rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNA</td>
+<td>不大于则跳转（同JBE指令）</td>
+</tr>
+</tbody>
+</table>
+<p>有符号整数比较结果：大于 G、小于 L</p>
+<table>
+<thead>
+<tr class="header">
+<th>助记符</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JG</td>
+<td>大于则跳转（leftOp＞rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNLE</td>
+<td>不小于或等于则跳转（同JG指令）</td>
+</tr>
+<tr class="odd">
+<td>JGE</td>
+<td>大于或等于则跳转（leftOp≥rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNL</td>
+<td>不小于则跳转（同JGE指令）</td>
+</tr>
+<tr class="odd">
+<td>JL</td>
+<td>小于则跳转（leftOp＜rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNGE</td>
+<td>不大于或等于则跳转（同JL指令）</td>
+</tr>
+<tr class="odd">
+<td>JLE</td>
+<td>小于或等于则跳转（leftOp≤rightOp）</td>
+</tr>
+<tr class="even">
+<td>JNG</td>
+<td>不大于则跳转（同JLE指令）</td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+<li><p>输入、输出</p>
+<ul>
+<li><p>IN、OUT</p>
+<ul>
+<li><p>IN：从端口读入一个字节、字</p></li>
+<li><p>OUT：向端口输出一个字节、字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">IN AL\AX, 端口地址<br></code></pre></td></tr></table></figure>
+<p>l端口地址：0～FFh 之间的一个常量，或是包含 0～FFFFh 之间的值的DX 寄存器。</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="常用伪指令操作符">常用伪指令、操作符</h3>
+<ul>
+<li><p>定义变量类型：</p>
+<p>DB：定义八位无符号整数 （BYTE）</p>
+<p>DW：定义 16 位无符号整数</p></li>
+<li><p><strong>OFFSET：</strong></p>
+<ul>
+<li>返回数据标号的偏移地址（标号距数据段开始的距离，以字节为单位）。</li>
+</ul></li>
+<li><p><strong>SEG + 符号：</strong></p>
+<ul>
+<li>取符号所在段的起始地址的高16位</li>
+</ul></li>
+<li><p>PTR：</p>
+<p>用来重载操作数的默认尺寸</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">.data<br>myDouble DWORD <span class="hljs-number">12345678</span>h<br>.code<br>mov ax, myDouble  ; 错误<br>mov ax, WORD PTR myDouble  ; ax = <span class="hljs-number">5678</span>h<br>mov ax, WORD PTR [myDouble+<span class="hljs-number">2</span>]	; ax = <span class="hljs-number">1234</span>h<br>mov bl, BYTE PTR myDouble  ; bl = <span class="hljs-number">78</span>h<br></code></pre></td></tr></table></figure></li>
+<li><p><strong>SIZEOF + 数组首地址符号</strong></p>
+<p>返回标号定义的数据所占用的字节数 （=LENGTHOF返回值×TYPE返回值）</p></li>
+</ul>
+<h3 id="常用寻址方式">常用寻址方式</h3>
+<ul>
+<li>立即寻址、直接寻址、寄存器寻址</li>
+<li>寄存器间接寻址：[BX]、[SI]、[DI]</li>
+<li>寄存器相对寻址：用于查表
+<ul>
+<li><strong>TAB[BX]、TAB[SI]、TAB[DI]</strong></li>
+<li>[TAB+BX]、[TAB+SI]、[TAB+DI]</li>
+</ul></li>
+<li>基址变址寻址：
+<ul>
+<li>[BX][SI]、[BX][DI]</li>
+<li>[BX+SI]、[BX+DI]</li>
+</ul></li>
+<li>相对基址变址寻址：
+<ul>
+<li>TAB[BX][SI]、TAB[BX][DI]</li>
+<li>TAB[BX+SI]、TAB[BX+DI]</li>
+<li>[TAB+BX+SI]、[TAB+BX+DI]</li>
+</ul></li>
+</ul>
+<h3 id="程序框架"><strong>程序框架</strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">STACK  SEGMENT STACK<br><br>       DB 100 DUP(0)<br><br>STACK  ENDS<br><br>DATA   SEGMENT<br><br>NUM8   DB 16,25<br><br>NUM16  DW 36,64<br><br>ARRAY8 DB 20 DUP(0)<br><br>………  …………<br><br>DATA   ENDS<br><br>CODE   SEGMENT<br><br>       ASSUME CS:CODE,DS:DATA,SS:STACK<br><br>START: MOV AX,DATA<br><br>       MOV DS,AX<br><br>        …………<br><br>       MOV AX,4C00H<br><br>       INT 21H<br><br>CODE   ENDS<br><br>       END START<br></code></pre></td></tr></table></figure>
+<p>子程序结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">     ……<br>    CALL SUB1<br>    ……    <br><br>SUB1 PROC<br>      PUSH …<br>     ……<br>     POP …<br>     RET<br><br>SUB1 ENDP<br></code></pre></td></tr></table></figure>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/12/12/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/Notes%20%E7%AC%94%E8%AE%B0/4/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>未命名</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/12/12/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/Notes%20%E7%AC%94%E8%AE%B0/2_8086%20%E5%A4%84%E7%90%86%E5%99%A8/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      未命名
+    </a>
+  
+</div>
+
+    
+    <div id="gitalk-container"></div>
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              
+                <div class="matts">欲</div>
+              
+                <div class="matts">买</div>
+              
+                <div class="matts">桂</div>
+              
+                <div class="matts">花</div>
+              
+                <div class="matts">同</div>
+              
+                <div class="matts">载</div>
+              
+                <div class="matts">酒</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">终</div>
+              
+                <div class="matts">不</div>
+              
+                <div class="matts">似</div>
+              
+            </div>
+          
+            <div class="foot-line">
+              
+                <div class="matts">少</div>
+              
+                <div class="matts">年</div>
+              
+                <div class="matts">游</div>
+              
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg"/>
+                <a class="foot-link" href="mailto:cbq99@foxmail.com">cbq99@foxmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">小破绽</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z"/>
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z"/>
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z"/>
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"SerendipitousSoul","admin":null,"repo":"git-demo","clientID":"ee59b3450833e498ec5a","clientSecret":null,"distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  param.id = location.pathname
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+
+  </body>
+</html>
